@@ -4,4 +4,4 @@
 </p>
 
 <!-- title / description (start) -->
-<h2 align="center">BaudvilleShopify Theme </h2>
+<h2 align="center">Baudville Shopify Theme </h2>
