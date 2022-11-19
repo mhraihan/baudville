@@ -1,0 +1,85 @@
+$green: #84cb89;
+$gray: #a1a1a1;
+
+.mh-page-wrapper {
+  @include respond-to(xlarge) {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  &.mt-40 {
+    @include respond-to(large) {
+      margin-top: 40px;
+    }
+    margin-bottom: 20px;
+  }
+
+  .homepage-sections--title {
+    color: var(--title-color, $green);
+    font-size: var(--title-font, 28px);
+    font-weight: var(--title-weight);
+    letter-spacing: var(--title-lts);
+  }
+
+  .homepage-sections--subtitle {
+    color: var(--subtitle-color, $gray);
+    font-size: var(--subtitle-font, --base-font-size);
+    font-weight: var(--subtitle-weight);
+    letter-spacing: var(--subtitle-lts);
+  }
+
+  .feature-row__text--left {
+    .homepage-featured-content-box-inner {
+      @include respond-to(large) {
+        padding: 30px 0 30px 60px;
+      }
+    }
+  }
+
+  .homepage-featured-content-box-inner {
+    @include respond-to(medium) {
+      padding: 30px 0;
+    }
+    p {
+      color: var(--text-color, $gray);
+      font-size: var(--text-font, --base-font-size);
+      font-weight: var(--text-weight, 400);
+      letter-spacing: var(--text-lts);
+      margin-bottom: 15px;
+
+      b,
+      strong {
+        color: var(--highlight-color, $green);
+        font-size: var(--highlight-font, --base-font-size);
+        font-weight: var(--highlight-weight);
+        letter-spacing: var(--highlight-lts);
+      }
+    }
+  }
+
+  .homepage-featured-box-btn {
+    margin-top: 15px;
+    min-width: 300px;
+    text-align: center !important;
+    font-size: var(--base-font-size);
+  }
+  // richtext
+  .sidebar-text {
+    text-align: center;
+    color: var(--richtext-color, $gray);
+    font-size: var(--richtext-font, --base-font-size);
+    font-weight: var(--richtext-weight, 400);
+    letter-spacing: var(--richtext-lts);
+    margin-bottom: 15px;
+    line-height: 1.2;
+
+    b,
+    strong {
+      color: var(--richtext-highlight-color, $green);
+      font-size: var(--richtext-highlight-font, --base-font-size);
+      font-weight: var(--richtext-highlight-weight);
+      letter-spacing: var(--richtext-highlight-lts);
+    }
+  }
+}

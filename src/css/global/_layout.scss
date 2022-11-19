@@ -1,0 +1,169 @@
+[v-cloak] {
+  display: none;
+}
+a {
+  outline: none;
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    outline: none;
+    text-decoration: none;
+  }
+}
+button {
+  outline: none;
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+/*helper class*/
+
+.hide {
+  display: none;
+}
+
+/*preview bar disable*/
+iframe#preview-bar-iframe {
+  display: none;
+}
+/*body overflow disable*/
+body {
+  overflow-x: hidden !important;
+  // @include font($font-body);
+}
+.p-0 {
+  padding: 0;
+}
+.w-full {
+  width: 100%;
+  max-width: 100% !important;
+}
+.h-full {
+  height: 100%;
+}
+.z-1 {
+  z-index: -1 !important;
+}
+.relative {
+  position: relative !important;
+}
+.absolute {
+  position: absolute;
+}
+.t-1 {
+  top: -1px !important;
+}
+.b-1 {
+  bottom: -1px !important;
+}
+.top-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.vertical-center {
+  @include vertical-center();
+}
+.no-lts {
+  letter-spacing: 0;
+}
+.no-case {
+  text-transform: none;
+}
+.ttu {
+  @include ttu();
+}
+.lh1 {
+  line-height: 1;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+/* ipad hide */
+.hidden-ipad {
+  display: block !important;
+
+  @include respond-to(xipad) {
+    display: none !important;
+  }
+}
+.show-ipad {
+  display: none !important;
+
+  @include respond-to(xipad) {
+    display: block !important;
+  }
+}
+/* small hide */
+.hidden-sm {
+  @include respond-to(medium) {
+    display: none !important;
+  }
+}
+.desktop-hide {
+  display: none !important;
+  @include respond-to(medium) {
+    display: block !important;
+  }
+}
+
+/* reset */
+
+ul,
+li {
+  list-style: none;
+}
+
+/* svg shape */
+.custom-shape-divider-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  svg {
+    position: relative;
+    display: block;
+    width: calc(125% + 1.3px);
+    height: 142px;
+    @include respond-to(xmedium) {
+      .template-product & {
+        height: 60px;
+      }
+    }
+  }
+  .shape-fill {
+    fill: #ffffff;
+  }
+}
+.custom-shape-divider-bottom {
+  top: unset;
+  bottom: 0;
+  transform: rotate(-180deg);
+}
+
+.full-link {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-indent: -10000px;
+}
+.full-link2 {
+  bottom: 100px;
+}

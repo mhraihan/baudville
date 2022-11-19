@@ -1,0 +1,79 @@
+$width: 35px;
+.product-swatch.swatch.clearfix {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 28px;
+	.header{
+		width: auto;
+		margin: 0;
+		font-size: 15px;
+		line-height: 1.5;
+		text-transform: none;
+		color: #9d9fa2;
+		margin-right: 5px;
+	}
+	.swatch-items-wrapper {
+	    display: inline-flex;
+	    justify-content: flex-end;
+	    flex: 1;
+	}
+}
+.color.swatch-element {
+	input+label {
+		border: 2px solid transparent;
+		min-width: $width !important;
+		width: $width;
+		height: $width;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-clip: content-box;
+		padding: 4px;
+		align-items: center;
+		justify-content: center;
+		padding: 3px;
+		&:after {
+			border: none;
+		}
+	}
+	input {
+		&:checked+label {
+			border-color: #9aa4a5;
+			box-shadow: none;
+		}
+	}
+}
+
+/*collection swatch*/
+
+.mh-swatch{
+	position: absolute;
+  bottom: 0;
+	.active.color.swatch-element input+label {
+    border: 2px solid #9aa4a5;
+	}
+	.swatch {
+		.swatch-element.color {
+			    margin-right: 0;
+
+			}
+		label{
+			min-width: $width !important;
+			width: $width;
+			height: $width;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-clip: content-box;
+			padding: 4px;
+			align-items: center;
+			justify-content: center;
+			padding: 3px;
+		}
+	}
+}

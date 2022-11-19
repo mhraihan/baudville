@@ -1,0 +1,32 @@
+/*logo list*/
+.logo-bar{
+	margin-bottom: 0;
+}
+.logo-bar__item{
+	width: calc(33% - 55px);
+	max-width: 100%;
+	&:first-child{
+		display: block;
+	    text-align: center;
+	    width: 100%;
+	    margin: 0 auto 35px;
+	}
+	@include respond-to(medium){
+	    width: 100%;
+	    display: block;
+	    margin-left: 0;
+	}
+}
+.logo-bar__image {
+    max-width: 250px;
+}
+.logo-bar-read {
+    overflow: hidden;
+    margin: 30px 0;
+}
+.read-btn {
+    color: #ff6666;
+    font-size: 18px;
+    font-family: 'Futura Lt BT';
+    font-weight: 300;
+}

@@ -1,0 +1,290 @@
+.grid--5-col-desktop {
+  .grid__item {
+    @include respond-to(ipad) {
+      width: calc(20% - 0.6666666667rem);
+    }
+    @include respond-to(xipad) {
+      width: calc(50% - 0.25rem);
+    }
+  }
+}
+.mh-featured-collection {
+  position: relative;
+  #Layer_1 {
+    @include respond-to(xipad) {
+      display: none;
+    }
+  }
+  .collection:not(.main-collection) {
+    max-width: 100%;
+    position: absolute;
+    z-index: 11;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 0;
+    @include respond-to(xipad) {
+      position: relative;
+      z-index: 11;
+      top: unset;
+      transform: unset;
+      .product-grid {
+        .grid__item {
+          &:first-child {
+            padding-top: 4rem;
+            max-width: 100%;
+            width: 100%;
+            .card-information__wrapper {
+              max-width: 400px;
+            }
+          }
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+          .card-information__wrapper {
+            max-width: 85%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    @include respond-to(medium) {
+      .product-grid {
+        .grid__item {
+          .card-information__wrapper {
+            max-width: 95%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    @include respond-to(ipad) {
+      .product-grid .grid__item {
+        background-color: transparent !important;
+      }
+    }
+  }
+  .title-wrapper-with-link {
+    @include respond-to(xipad) {
+      display: none;
+    }
+  }
+  .product-grid {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .card-wrapper {
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-decoration: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .media {
+    padding-bottom: 0 !important;
+  }
+
+  .media > *:not(.zoom):not(.deferred-media__poster-button),
+  .media model-viewer {
+    display: block;
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    // height: 100%;
+    // width: 300px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transform: scale(0.95);
+    @include respond-to(custom) {
+      // width: 250px;
+      height: 250px;
+    }
+    .has-3-products & {
+      height: 200px;
+
+      @include respond-to(custom) {
+        height: 165px;
+      }
+      @include respond-to(xlarge) {
+        height: 250px;
+      }
+      @include respond-to(xxlarge) {
+        height: 350px;
+      }
+      @include respond-to(xipad) {
+        height: 300px;
+        object-fit: contain;
+      }
+      @include respond-to(medium) {
+        height: auto;
+      }
+    }
+    .has-5-products & {
+      @include respond-to(ipad) {
+        width: auto;
+        height: auto;
+      }
+      @include respond-to(xipad) {
+        height: 300px;
+        object-fit: contain;
+      }
+      @include respond-to(medium) {
+        height: auto;
+      }
+    }
+  }
+
+  .card-information__wrapper {
+    text-align: left;
+  }
+
+  .card-wrapper {
+    @include hover-content() {
+      @include respond-to(ipad) {
+        .media.media--hover-effect > img:first-child:only-child {
+          transform: scale(1);
+        }
+      }
+      .card-information__text {
+        text-decoration: unset;
+        text-underline-offset: unset;
+      }
+    }
+  }
+  .card-subtitle {
+    @include subtitle();
+  }
+  .product-subtitle {
+    font-size: 16px;
+    @include respond-to(xipad) {
+      font-size: 16px;
+    }
+    .has-3-products & {
+      font-size: 20px;
+      @include respond-to(xxlarge) {
+        font-size: 25px;
+      }
+    }
+    .has-5-products & {
+      @include respond-to(ipad) {
+        font-size: 14px;
+      }
+      @include respond-to(xxlarge) {
+        font-size: 20px;
+      }
+    }
+  }
+  .card-information__text {
+    @include dot();
+    @include title();
+    @include title(25px);
+
+    @include respond-to(xipad) {
+      @include title(24px);
+    }
+    .has-3-products & {
+      @include title(20px);
+      @include respond-to(large) {
+        @include title(30px);
+      }
+      @include respond-to(xlarge) {
+        @include title(40px);
+      }
+      @include respond-to(xxlarge) {
+        @include title(50px);
+      }
+    }
+    .has-5-products & {
+      @include respond-to(ipad) {
+        @include title(25px);
+      }
+      @include respond-to(xlarge) {
+        @include title(30px);
+      }
+      @include respond-to(xxlarge) {
+        @include title(35px);
+      }
+    }
+  }
+}
+
+.add-to-bag {
+  button {
+    &.product-form__submit {
+      width: 100% !important;
+      @include respond-to(xlarge) {
+        min-width: 135px;
+      }
+      @include respond-to(small) {
+        font-size: 11px;
+      }
+      @include respond-to(medium) {
+        font-size: 12px;
+      }
+    }
+
+    @include add-bag();
+    @include respond-to(xxmedium) {
+      font-size: 12px;
+    }
+  }
+}
+.btn-text {
+  @include btn();
+}
+.btn-selector {
+  @include btn(40px, 0);
+}
+.select__select {
+  border: none;
+  box-shadow: unset;
+  color: #fff;
+  font-size: 18px;
+  padding: 0 12px 0 0;
+  width: 100%;
+  @include dot();
+  @include ttu();
+  @include hover-content() {
+    box-shadow: none;
+    outline: none;
+  }
+}
+.select {
+  .icon-caret {
+    color: #fff;
+  }
+}
+.loading-overlay__spinner {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+  right: 5px;
+}
+.select__select {
+  font-size: 14px;
+}
+.select {
+  @include respond-to(xipad) {
+    width: auto;
+  }
+  .icon-caret {
+    top: calc(45% - 0rem);
+    transform: translateY(-45%);
+  }
+}
+.variant-price {
+  font-size: 14px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  @include dot();
+  .has-3-products & {
+    @include respond-to(xxlarge) {
+      font-size: 20px;
+    }
+  }
+}

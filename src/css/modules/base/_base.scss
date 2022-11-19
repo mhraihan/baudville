@@ -1,0 +1,145 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #6a747c;
+  a {
+    color: #6fae9f;
+  }
+  .container {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bebas Neue", cursive;
+}
+.main-menu {
+  font-family: "Bebas Neue", cursive;
+  li {
+    a {
+      color: #6a747c;
+    }
+    &:hover {
+      > a {
+        color: #6fae9f;
+      }
+    }
+  }
+}
+.footer-top {
+  button[type="submit"] {
+    font-family: "Bebas Neue", cursive;
+    background-color: #fe715e;
+    color: #fff;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  li {
+    a {
+      display: inline-block;
+      padding: 5px 0;
+    }
+  }
+}
+.heading-font {
+  font-family: "Bebas Neue", cursive;
+}
+.header-top {
+  background-color: #6a747c;
+  a {
+    color: #fff;
+  }
+}
+.secondary-color {
+  color: #fe715e;
+}
+.primary-bg {
+  background-color: #6fae9f;
+}
+.primary-color {
+  color: #6fae9f;
+}
+a {
+  color: #6fae9f;
+}
+.primary-border-color {
+  border-color: #9ec9bf;
+}
+.social-icons {
+  svg {
+    fill: #fff;
+    height: 20px;
+    width: 20px;
+  }
+  a {
+    height: 35px;
+    width: 35px;
+    background-color: #6fae9f;
+    margin: 0 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.header-top-menu {
+  a {
+    border-right: 1px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+  li {
+    &:last-child {
+      a {
+        border: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
+.footer-bg {
+  background-color: #cee1dc;
+  color: #6a747c;
+  a {
+    color: #6a747c;
+  }
+}
+.seal-logos {
+  img {
+    max-height: 70px;
+    max-width: 87px;
+    margin: 0 11px;
+  }
+}
+.footer-brands {
+  background-color: #6fae9f;
+  img {
+    max-width: 115px;
+    margin: 0 20px;
+  }
+}
+.pink-bg {
+  background-color: #ffe2e0;
+  color: #ff715e;
+}
+.pink-cta-text {
+  h2 {
+    color: #ff715e;
+    font-family: Playfair display, sans-serif;
+  }
+  a {
+    font-weight: 700;
+  }
+}

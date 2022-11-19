@@ -1,0 +1,152 @@
+/*================ Mixins ================*/
+
+/*================ Predefine Media Query Mixin ================*/
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "xsmall" {
+    @media (max-width: 380px) {
+      @content;
+    }
+  } @else if $breakpoint == "small" {
+    @media (max-width: 480px) {
+      @content;
+    }
+  } @else if $breakpoint == "xxsmall" {
+    @media (max-width: 800px) {
+      @content;
+    }
+  } @else if $breakpoint == "medium" {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $breakpoint == "xmedium" {
+    @media (max-width: 990px) {
+      @content;
+    }
+  } @else if $breakpoint == "xipad" {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $breakpoint == "xxmedium" {
+    @media (max-width: 1339px) {
+      @content;
+    }
+  } @else if $breakpoint == "large" {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == "larger" {
+    @media (min-width: 991px) {
+      @content;
+    }
+  } @else if $breakpoint == "ipad" {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  } @else if $breakpoint == "xlarge" {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $breakpoint == "xxlarge" {
+    @media (min-width: 1500px) {
+      @content;
+    }
+  } @else if $breakpoint == "ie10+" {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      @content;
+    }
+  } @else if $breakpoint == "tablet" {
+    @media only screen and (min-width: 1140px) and (max-width: 1600px) {
+      @content;
+    }
+  } @else if $breakpoint == "twok" {
+    @media only screen and (min-width: 1921px) {
+      @content;
+    }
+  } @else if $breakpoint == "fourk" {
+    @media only screen and (min-width: 2560px) {
+      @content;
+    }
+  } @else if $breakpoint == "custom" {
+    @media only screen and (min-width: 768px) and (max-width: 1099px) {
+      @content;
+    }
+  } @else {
+    @media ($breakpoint) {
+      @content;
+    }
+  }
+}
+
+/*================ Responsive Show/Hide Helper ================*/
+
+@mixin responsive-display-helper($breakpoint: "") {
+  // sass-lint:disable no-important
+  .#{$breakpoint}show {
+    display: block !important;
+  }
+  .#{$breakpoint}hide {
+    display: none !important;
+  }
+}
+
+/*================ Responsive Text Alignment Helper ================*/
+
+@mixin responsive-text-align-helper($breakpoint: "") {
+  // sass-lint:disable no-important
+  .#{$breakpoint}text-left {
+    text-align: left !important;
+  }
+  .#{$breakpoint}text-right {
+    text-align: right !important;
+  }
+  .#{$breakpoint}text-center {
+    text-align: center !important;
+  }
+}
+
+@mixin visually-hidden {
+  // sass-lint:disable no-important
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin visually-shown($position: inherit) {
+  // sass-lint:disable no-important
+  position: $position !important;
+  overflow: auto;
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+@mixin placeholder-text($color: $color-textfield-text, $opacity: 0.6) {
+  color: $color;
+  opacity: $opacity;
+}
+
+@mixin hover($color: inherit) {
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color;
+  }
+}
+@mixin hover-content() {
+  &:hover,
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+@mixin transition($duration: 0.2s) {
+  transition: all $duration ease 0s;
+}

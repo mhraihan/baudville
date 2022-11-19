@@ -1,0 +1,15 @@
+.mh-mobile-menu {
+  background: #fff;
+  padding: 20px 0 30px;
+  display: none;
+  a.icon-with-label {
+    flex-direction: row;
+    font-size: 40px;
+    font-family: "Henrik Normal";
+    line-height: 1.4;
+    span:first-child {
+      margin-bottom: 8px;
+      margin-right: 10px;
+    }
+  }
+}

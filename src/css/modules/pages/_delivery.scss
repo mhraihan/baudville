@@ -1,0 +1,212 @@
+.template-page{
+  .wrapper.main-content.page-main--wrapper {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+.mh-deliver-image{
+  img{
+    width: 100%;
+  }
+}
+.page-container{
+  max-width: 1300px;
+  padding: 0 15px;
+  margin: 40px auto;
+  @include respond-to(large){
+    // padding: 0 30px;
+    margin: 100px auto 40px;
+
+    .pl-60{
+      padding-left: 60px;
+    }
+    .pr-30{
+      padding-right: 30px;
+    }
+  }
+}
+.item-title{
+  color: #999999;
+  margin-bottom: 15px;
+}
+.color-green{
+  color: #4ca259;
+}
+.cf-widget-item {
+    margin-bottom: 40px;
+    color: #999;
+    font-size: 16px;
+    a{
+      color: #999;
+      border: none;
+    }
+}
+.cf-widget-field table  {
+  color: #545a6a;
+  font-weight: 300;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.cf-widget-field table  p {
+  font-size: 11px;
+  margin: 0;
+  line-height: 1.4;
+  i,em{
+    font-style: normal;
+    color: #4ca259 !important;
+  }
+  @include respond-to(medium){
+    font-size: 14px;
+  }
+}
+
+.cf-widget-field table  h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  @include respond-to(medium){
+    font-size: 14px;
+  }
+}
+
+.cf-widget-field table  td,
+.cf-widget-field table  th {
+  color: #999999;
+  text-align: left;
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid #999999;
+  word-wrap: break-word;
+  width: 33.33%;
+  @include respond-to(medium){
+    font-size: 14px;
+    padding: 20px 10px;
+  }
+}
+
+.cf-widget-field table  tbody tr:nth-child(even) td,
+.cf-widget-field table  tbody tr:nth-child(even) th {
+  background-color: #f1f2f2;
+}
+
+.cf-widget-field table -deliveryType,
+.cf-widget-field table -deliveryZone {
+  font-size: 14px;
+}
+
+.cf-widget-field table -deliveryZone {
+  width: 180px;
+}
+
+.cf-widget-field table -deliveryZone--eu {
+  width: 70%;
+}
+
+.cf-widget-field table -deliveryType sup {
+  font-size: 0.8em;
+}
+
+.cf-widget-field table -countries,
+.cf-widget-field table -orderBy {
+  font-weight: 300;
+  font-size: 10px;
+}
+
+p.cf-widget-field table -cost {
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 90px;
+}
+
+.cf-widget-field table -freeDelivery {
+  color: #999999;
+  text-transform: uppercase;
+  display: block;
+}
+
+.cf-widget-field table -freeDelivery--threshold {
+  font-size: 11px;
+}
+
+  // .cf-widget-field table  {
+  //   width: 600px;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+
+  .cf-widget-field table  p {
+    font-size: 15px;
+    @include respond-to(medium){
+      font-size: 14px;
+    }
+  }
+
+  .cf-widget-field table -freeDelivery--threshold {
+    display: inline;
+    font-size: 15px;
+  }
+
+  .cf-widget-field table  h3 {
+    font-size: 19px;
+    @include respond-to(medium){
+      font-size: 14px;
+    }
+  }
+
+  p.cf-widget-field table -cost {
+    font-size: 16px;
+  }
+
+.cf-widget-field table -deliveryType {
+  width: 180px;
+}
+
+.cf-widget-field table -deliveryZone--eu {
+  width: 60%;
+}
+
+ul.creditInformation-iconList {
+  margin: 35px 0;
+  color: #545a6a;
+  list-style: none;
+}
+
+  ul.creditInformation-iconList {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+li.creditInformation-iconListItem {
+  margin: 0 0 25px;
+}
+
+li.creditInformation-iconListItem::before {
+  content: none;
+}
+
+.creditInformation-iconListText p {
+  margin: 0 0 0 65px;
+  width: auto;
+}
+
+.creditInformation-iconListText strong {
+  color: #f04e00;
+  font-weight: 700;
+}
+.cf-widget-field table ~ *,
+.table-note {
+    font-size: 11px !important;
+    margin-bottom: 4px;
+}
+.pl-60{
+  @include respond-to(medium){
+    margin-top: 0;
+  }
+}

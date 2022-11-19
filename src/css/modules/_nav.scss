@@ -1,0 +1,8 @@
+li.site-nav--has-dropdown:hover ul {
+    opacity: 1;
+    visibility: visible;
+}
+
+body .header-section.sticky-header:not(.sticked) ul.site-nav__dropdown.standard-dropdown li a.site-nav__link {
+    color: var(--nav-text-color) !important;
+}

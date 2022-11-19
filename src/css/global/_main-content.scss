@@ -1,0 +1,54 @@
+/****************************************
+  /* Main content
+  **************************************/
+main#MainContent {
+  margin-top: calc(var(--header) + var(--announcement));
+  .scrolled & {
+    margin-top: 100px;
+  }
+  .page-contact & {
+    z-index: 1;
+  }
+}
+
+.main-content {
+  @include respond-to("ipad") {
+    // padding-top: 0;
+    .template-collection & {
+      padding-top: 0 !important;
+    }
+
+    .template-blog & {
+      padding-top: 0 !important;
+    }
+
+    .template-page & {
+      padding-top: 0 !important;
+    }
+
+    // .page-lookbook & {}
+  }
+  @include respond-to("large") {
+    min-height: 77vh;
+  }
+  @include respond-to("xipad") {
+    padding-top: 104px;
+  }
+}
+
+.main-content-wrapper {
+  @include respond-to("ipad") {
+  }
+  @include respond-to("large") {
+    min-height: 77vh;
+  }
+  // @include respond-to('medium') {
+  //    .template-index & {
+  //       // margin-top: 0;
+  //    }
+
+  //    .template-collections & {
+  //       // padding: 0;
+  //    }
+  // }
+}

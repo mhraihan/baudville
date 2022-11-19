@@ -1,0 +1,45 @@
+/*================ Links & Buttons ================*/
+
+// add to cart
+// disable when cart is zero
+[data-cart="0"] .minus {
+  pointer-events: none;
+}
+.product-form__submit.product-cart-add-0 {
+  width: 200px;
+  max-width: 160px;
+  @include respond-to(xxmedium) {
+    max-width: 100px;
+  }
+}
+
+body {
+  .button,
+  .shopify-challenge__button,
+  .customer button {
+    @include dot();
+    background: var(--yellow-primary);
+    border-radius: 5px;
+    border-color: var(--yellow-primary);
+    color: var(--red-primary);
+    box-shadow: 0 0 0 0.1rem
+      rgba(var(--yellow-primary), var(--alpha-button-border));
+    font-size: 18px;
+    @include hover-content() {
+      box-shadow: 0 0 0 0.2rem
+        rgba(var(--yellow-primary), var(--alpha-button-border));
+    }
+  }
+  .customer button {
+    padding-bottom: 2px;
+    @include respond-to(ipad) {
+      min-width: 200px;
+    }
+  }
+}
+.lh-1 {
+  line-height: 1 !important;
+}
+button:disabled {
+  cursor: not-allowed;
+}
