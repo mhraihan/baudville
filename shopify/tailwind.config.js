@@ -1,14 +1,14 @@
-/**
- * Tailwind CSS configuration file
- *
- * docs: https://tailwindcss.com/docs/configuration
- * default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
- */
-const path = require("path");
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  content: [],
   theme: {
-    extend: {},
+    extend: {
+      lineHeight: {
+        "extra-loose": "2.5",
+        12: "3rem",
+      },
+    },
     colors: {
       transparent: "transparent",
       black: "#000",
@@ -16,7 +16,7 @@ module.exports = {
       gray: {
         50: "#E5E5E5",
         100: "#6a747c",
-        200: "#e4e5e5",
+        200: "#edf2f7",
         300: "#333333",
         400: "#4F4F4F",
         500: "#a0aec0",
@@ -27,7 +27,6 @@ module.exports = {
         1000: "#999999",
       },
       red: {
-        50: "#ff705e",
         100: "#fff5f5",
         200: "#fed7d7",
         300: "#feb2b2",
@@ -61,7 +60,7 @@ module.exports = {
         900: "#FFF0DC",
       },
       green: {
-        100: "#EBFAEB",
+        100: "#6fae9f",
         200: "#c6f6d5",
         300: "#27AE60",
         400: "#DDF1D6",
@@ -127,14 +126,6 @@ module.exports = {
         900: "#702459",
       },
     },
-    container: {
-      center: true,
-      padding: "1rem",
-    },
   },
   plugins: [],
-  content: [
-    path.resolve(__dirname, "**/*.{js,vue}"),
-    path.resolve(__dirname, "../shopify/**/*.liquid"),
-  ],
 };
