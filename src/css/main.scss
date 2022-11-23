@@ -8,8 +8,21 @@
 @import "tailwindcss/utilities";
 
 /*--------------------------------------------------------------
+# Global
+--------------------------------------------------------------*/
+
+// @import "global/grid";
+@import "global/layout";
+// @import "global/buttons";
+// @import "global/main-content";
+/*--------------------------------------------------------------
 # module
 --------------------------------------------------------------*/
 
 @import "modules/base/base";
 @import "modules/header/header";
+@import "modules/slideshow";
+@import "modules/richtext";
+@import "modules/richtext";
+
+@import "modules/footer/footer";

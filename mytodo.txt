@@ -1,0 +1,19 @@
+//noted
+shopify login --store=baudville-dev.myshopify.com
+// this custom color used
+gray: {
+    100: "#6a747c",
+    200: "#e4e5e5",
+},
+red: {
+    50: "#ff705e",
+},
+green: {
+    50: "#6eae9f",
+    100: "#6fae9f,
+    200: "#549586",
+},
+pink: {
+    50: "#ffe2e0",
+    100: "#ff715e",
+}

@@ -54,3 +54,30 @@
     fill: #74a300;
   }
 }
+
+/* megamenu */
+
+.primary-nav__content {
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 3px 3px -1px rgb(106 116 124 / 25%);
+}
+li.mega-menu-items {
+  @include hover-content() {
+    .primary-nav__content {
+      display: flex;
+    }
+  }
+}
+
+.nav-content-block__button {
+  a {
+    border-radius: 0 0 4px 4px;
+    font-family: "Bebas Neue", sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+img.nav-content-block__image {
+  border-radius: 4px 4px 0 0;
+  // height: 160px;
+}

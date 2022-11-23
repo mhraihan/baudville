@@ -1,0 +1,83 @@
+<div class="pt-{{ section.settings.pt }} pb-{{ section.settings.pb }}">
+  <div class="container swiper brand-images-swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="swiper-slide">
+          <div class="relative fullwidth-banner ">
+            {% assign image = block.settings.image %}
+            {% render 'image', image: image, url: block.settings.url %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <!-- If we need pagination -->
+    {%- comment -%}
+      <div class="swiper-pagination"></div>
+    {%- endcomment -%}
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Brand Slider",
+    "class": "shopify-brand-slider",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Adjust padding"
+      }, {
+        "type": "range",
+        "label": "Padding Top",
+        "id": "pt",
+        "min": 0,
+        "max": 96,
+        "step": 1,
+        "default": 0
+      }, {
+        "type": "range",
+        "label": "Padding Bottom",
+        "id": "pb",
+        "min": 0,
+        "max": 96,
+        "step": 1,
+        "default": 0
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:common.image"
+          }, {
+            "type": "url",
+            "id": "url",
+            "label": "Image Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Brand Slider",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          }, {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

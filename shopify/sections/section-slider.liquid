@@ -1,41 +1,40 @@
 <div class="py-{{ section.settings.py }}">
-  <div class="container">
-    <div class="flex mb-0 -mx-3">
+  <div class="swiper product-images-swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
       {%- for block in section.blocks -%}
-        {% assign image = block.settings.image %}
-        <div class="{{ section.settings.row }} px-3 relative">
-          {% assign image = block.settings.image %}
-          {% render 'image', image: image, url: block.settings.url %}
+        <div class="swiper-slide" data-swiper-autoplay="2000">
+          <div class="relative fullwidth-banner ">
+            {% assign image = block.settings.image %}
+            {% render 'image', image: image, url: block.settings.url %}
+          </div>
         </div>
       {%- endfor -%}
     </div>
+    <!-- If we need pagination -->
+    {%- comment -%}
+      <div class="swiper-pagination"></div>
+    {%- endcomment -%}
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
 </div>
 
-
 {% schema %}
   {
-    "name": "t:sections.hero.name",
-    "class": "shopify-multiple-image",
-    "max_blocks": 4,
+    "name": "Slider",
+    "class": "shopify-slider",
+    "max_blocks": 20,
     "settings": [
       {
-        "type": "select",
-        "id": "row",
-        "label": "Image Per Row",
-        "default": "w-1/2",
-        "options": [
-          {
-            "value": "w-1/2",
-            "label": "2"
-          }, {
-            "value": "w-4/12",
-            "label": "3"
-          }, {
-            "value": "w-3/12",
-            "label": "4"
-          }
-        ]
+        "type": "header",
+        "content": "Slider Settings"
+      }, {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": false
       }, {
         "type": "header",
         "content": "Adjust padding"
@@ -46,7 +45,7 @@
         "min": 0,
         "max": 96,
         "step": 1,
-        "default": 10
+        "default": 0
       }
 
     ],
@@ -69,7 +68,7 @@
     ],
     "presets": [
       {
-        "name": "t:sections.hero.name",
+        "name": "Slider",
         "category": "Image",
         "blocks": [
           {
