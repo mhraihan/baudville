@@ -1,37 +1,5 @@
-.template-collection {
-  .page-main--wrapper{
-    padding-top: 0;
-  }
-  .main-content {
-      padding-bottom: 0;
-  }
-  .featured-collection {
-    padding: 0;
-}
-  .collection-style--grid {
-    .section-header {
-        margin-bottom: 0;
-        padding: 30px 0;
-    }
-  }
-}
-
-.collection-main-body-inner {
-  display: flex;
-  flex-wrap: wrap;
-  > div{
-      margin-bottom: 15px !important;
-      @include respond-to(large){
-        flex: 1 33.33%;
-        width: 33.33%;
-        max-width: 33.33%;
-        margin-bottom: 40px !important;
-      }
-  }
-  .product_title{
-    color: #9d9fa2;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 0;
-  }
+.product-summary__media {
+  // height: var(--product-image, auto);
+  min-height: 150px;
+  overflow: hidden;
 }

@@ -4,9 +4,12 @@ shopify login --store=baudville-dev.myshopify.com
 gray: {
     100: "#6a747c",
     200: "#e4e5e5",
+    300: "#d7d9db",
+
 },
 red: {
     50: "#ff705e",
+    100: "#fe715e",
 },
 green: {
     50: "#6eae9f",
@@ -16,4 +19,7 @@ green: {
 pink: {
     50: "#ffe2e0",
     100: "#ff715e",
+},
+teal: {
+        100: "#9ec9bf",
 }

@@ -1,8 +1,8 @@
 body {
   font-family: "Montserrat", sans-serif;
-  color: #6a747c;
+  @apply text-gray-100;
   a {
-    color: #6fae9f;
+    @apply text-green-100;
   }
 }
 h1,
@@ -21,40 +21,23 @@ h6 {
   font-family: "Bebas Neue", cursive;
 }
 .header-top {
-  background-color: #6a747c;
+  @apply bg-gray-100;
   a {
-    color: #fff;
+    @apply text-white;
   }
 }
 .secondary-color {
-  color: #fe715e;
+  @apply text-red-100;
 }
 .primary-bg {
-  background-color: #6fae9f;
+  @apply bg-green-100;
 }
 .primary-color {
-  color: #6fae9f;
+  @apply text-green-100;
 }
 a {
-  color: #6fae9f;
+  @apply text-green-100;
 }
 .primary-border-color {
-  border-color: #9ec9bf;
-}
-
-.header-top-menu {
-  a {
-    border-right: 1px solid;
-    padding-right: 10px;
-    margin-right: 10px;
-  }
-  li {
-    &:last-child {
-      a {
-        border: none;
-        padding-right: 0;
-        margin-right: 0;
-      }
-    }
-  }
+  @apply border-teal-100;
 }

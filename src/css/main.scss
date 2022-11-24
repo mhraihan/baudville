@@ -8,21 +8,30 @@
 @import "tailwindcss/utilities";
 
 /*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+@import "typography/typography";
+/*--------------------------------------------------------------
 # Global
 --------------------------------------------------------------*/
 
-// @import "global/grid";
+@import "global/modal";
 @import "global/layout";
-// @import "global/buttons";
+@import "global/buttons";
 // @import "global/main-content";
 /*--------------------------------------------------------------
 # module
 --------------------------------------------------------------*/
 
 @import "modules/base/base";
+@import "modules/breadcrumbs";
+
 @import "modules/header/header";
 @import "modules/slideshow";
 @import "modules/richtext";
 @import "modules/richtext";
+
+@import "modules/collections";
 
 @import "modules/footer/footer";

@@ -150,3 +150,15 @@
 @mixin transition($duration: 0.2s) {
   transition: all $duration ease 0s;
 }
+
+@mixin font-bn() {
+  font-family: "Bebas Neue", cursive;
+}
+
+@mixin font-mont() {
+  font-family: "Montserrat", sans-serif;
+}
+
+@mixin font-play() {
+  font-family: "Playfair Display", serif;
+}

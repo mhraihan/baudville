@@ -1,45 +1,34 @@
 /*================ Links & Buttons ================*/
 
-// add to cart
-// disable when cart is zero
-[data-cart="0"] .minus {
-  pointer-events: none;
-}
-.product-form__submit.product-cart-add-0 {
-  width: 200px;
-  max-width: 160px;
-  @include respond-to(xxmedium) {
-    max-width: 100px;
-  }
+.button {
+  @apply w-full sm:w-auto inline-block border text-base font-medium text-center rounded-sm transition duration-150 px-6 py-2;
 }
 
-body {
-  .button,
-  .shopify-challenge__button,
-  .customer button {
-    @include dot();
-    background: var(--yellow-primary);
-    border-radius: 5px;
-    border-color: var(--yellow-primary);
-    color: var(--red-primary);
-    box-shadow: 0 0 0 0.1rem
-      rgba(var(--yellow-primary), var(--alpha-button-border));
-    font-size: 18px;
-    @include hover-content() {
-      box-shadow: 0 0 0 0.2rem
-        rgba(var(--yellow-primary), var(--alpha-button-border));
-    }
-  }
-  .customer button {
-    padding-bottom: 2px;
-    @include respond-to(ipad) {
-      min-width: 200px;
+.button-primary {
+  @apply bg-black hover:bg-gray-700 border-black hover:border-gray-700 text-white;
+}
+
+.button-secondary {
+  @apply border-black hover:bg-black hover:text-white;
+}
+
+/* override default Shopify styling */
+.button-shopify-buy-it-now {
+  .shopify-payment-button__button {
+    @apply h-12 bg-black border-black text-white border text-base font-medium text-center rounded-sm transition duration-150 px-6 py-2;
+
+    &:hover {
+      background: theme("colors.gray.700") !important;
+      border-color: theme("colors.gray.700") !important;
     }
   }
 }
-.lh-1 {
-  line-height: 1 !important;
+.button--full {
+  @apply block w-full;
 }
-button:disabled {
-  cursor: not-allowed;
+.button--quickview {
+  @apply text-center bg-red-50 text-white text-sm border-none rounded-none font-semibold;
+  @include hover-content() {
+    @apply bg-red-600;
+  }
 }

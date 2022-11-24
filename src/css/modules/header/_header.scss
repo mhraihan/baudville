@@ -1,3 +1,20 @@
+.header-top-menu {
+  a {
+    border-right: 1px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+  li {
+    &:last-child {
+      a {
+        border: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 .dropdown {
   @include hover-content() {
     .dropdown-menu {
@@ -14,11 +31,13 @@
 
 .svg-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  @apply inline-block w-6 h-6;
   vertical-align: middle;
   -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
+}
+.svg-icon--small {
+  @apply w-4 h-4;
 }
 .svg-icon--page-header-cart {
   width: 28px;

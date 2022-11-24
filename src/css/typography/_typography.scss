@@ -1,15 +1,10 @@
-.ro {
-  @include ro();
+.font-bn {
+  @include font-bn();
 }
-.sc {
-  @include sc();
+.font-mont {
+  @include font-mont();
 }
-.ns {
-  @include ns();
-}
-.hk {
-  @include hk();
-}
-.dot {
-  @include dot();
+
+.font-play {
+  @include font-play();
 }

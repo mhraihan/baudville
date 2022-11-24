@@ -1,8 +1,8 @@
 .richtext-section {
   h2 {
-    font-family: "Playfair Display", serif;
+    @include font-play();
   }
   a {
-    font-weight: 700;
+    @apply font-bold;
   }
 }
