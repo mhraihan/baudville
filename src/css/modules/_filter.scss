@@ -1,0 +1,90 @@
+.desktop-filters__section {
+  position: relative;
+  padding: 8px 0;
+  float: left;
+  cursor: pointer;
+  &:first-child {
+    .desktop-filters__heading {
+      padding-left: 0;
+    }
+  }
+
+  &:hover {
+    ul {
+      display: block;
+    }
+    .desktop-filters__heading {
+      &::after {
+        transform: translate(0, -50%) rotate(180deg);
+      }
+    }
+  }
+}
+.desktop-filters__section
+  + .desktop-filters__section
+  .desktop-filters__heading {
+  border-left: 1px solid #a6acb0;
+}
+.desktop-filters__heading {
+  @include font-mont();
+  @apply text-sm font-semibold text-gray-100 py-2 pr-10 pl-4 relative block;
+  &::after {
+    display: block;
+    text-indent: 200%;
+    width: 12px;
+    height: 10px;
+    background: transparent;
+    white-space: nowrap;
+    background-image: url(https://pbv-baudville-weblinc.netdna-ssl.com/assets/workarea/storefront/icons/down_caret_with_gray-220d691028b3c6f428e66db5834c7abb8733c3f7f2d77098cc3453b5a018e4c8.svg);
+    background-size: 12px 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%) rotate(0deg);
+    position: absolute;
+    right: 16px;
+    font-size: 22px;
+    content: "";
+    @include transition();
+  }
+}
+.desktop-filters__group {
+  display: none;
+  position: absolute;
+  top: 100%;
+  min-width: 170px;
+  background: #ffffff;
+  border: 1px solid #a6acb0;
+  z-index: 11;
+}
+.result-filter {
+  background-color: #ffffff;
+  border-bottom: 1px solid #a6acb0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #a6acb0;
+}
+.result-filter__link {
+  display: block;
+  padding: 14px 12px;
+  color: #6a747c;
+  font-size: 14px;
+}
+.result-filter__checkbox {
+  display: inline-block;
+  position: relative;
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border: 1px solid #a6acb0;
+  border-radius: 2px;
+  vertical-align: middle;
+  display: none;
+}
+.result-filter__value {
+  vertical-align: middle;
+}
+.result-filter__count {
+  vertical-align: middle;
+}

@@ -1,53 +1,65 @@
 {% assign limit = 8 %}
-<div class="container pt-0">
-  {% if collection.image %}
-    <div class="pb-10">
-      <img src="{{ collection.image | image_url }}" alt="" loading="true">
-    </div>
-  {% endif %}
-  <h1 class="mb-6 text-2xl font-bold text-center md:text-3xl md:mb-16">
-    {{ collection.title }}
-  </h1>
-
-  {% if collection.description != blank %}
-    <div class="block overflow mx-auto mb-6 md:-mt-6 md:mb-12">
-      {{ collection.description }}
-    </div>
-  {% endif %}
-
-  {% paginate collection.products by limit %}
-    {% if collection and collection.products %}
-      {% assign amount = collection.all_products_count %}
-      {% render 'layout-sort-bar', amount: amount class: 'mb-8' %}
-      <div class="product-result-controls flex items-center justify-between text-gray-100 mb-3">
-        <h2 class="product-result-controls__category-name text-xl">
-          {{ collection.metafields.custom.subtitle | default: collection.title }}
-        </h2>
-        <div class="hidden sm:inline-block">
-          {{ amount }} {{ amount | pluralize: 'Item', 'Items' }}
-        </div>
-      </div>
-      <div class="collection-products grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6">
-        {% for product in collection.products %}
-          {% render 'product-card', product_card: product, index: forloop.index %}
-        {% endfor %}
-      </div>
-    {% else %}
-      <div>
-        {{ 'common.no_products' | t }}
+<div class="pt-0">
+  <div class="container">
+    {% if collection.image %}
+      <div class="pb-10">
+        <img src="{{ collection.image | image_url }}" alt="" loading="true">
       </div>
     {% endif %}
+    <h1 class="mb-6 text-2xl font-bold text-center md:text-3xl md:mb-16">
+      {{ collection.title }}
+    </h1>
 
-
-    {%- comment -%}
-      {% render 'layout-pagination', paginate: paginate %}
-    {%- endcomment -%}
-    <renderless-pagination-products :pages="{{ paginate.pages }}" :current="{{ paginate.current_page }}" :limit="{{ limit }}" :handle="'{{ collection.handle }}'" :target="'.collection-products'" :url="'{{  collection.url }}'" v-slot="{ loadMore, text, show }">
-      <div v-if="show.value" class="pagination flex items-center justify-center">
-        <button v-if="text" @click="loadMore" class="button uppercase px-10 py-5 tracking-widest font-bn mt-6" v-html="text.value"></button>
+    {% if collection.description != blank %}
+      <div class="block overflow mx-auto mb-6 md:-mt-6 md:mb-12">
+        {{ collection.description }}
       </div>
-    </renderless-pagination-products>
-  {% endpaginate %}
+    {% endif %}
+  </div>
+  {% if collection and collection.products %}
+    <div class="custom-filter w-full border-b border-gray-200 mb-8">
+      <div class="container ">
+        {% assign amount = collection.all_products_count %}
+        {% render 'layout-sort-bar', amount: amount, section: section, class: 'mb-0' %}
+      </div>
+    </div>
+  {% endif %}
+  <div class="container">
+    {% paginate collection.products by limit %}
+      {% if collection and collection.products %}
+        <div class="product-result-controls flex items-center justify-between text-gray-100 mb-3">
+          <h2 class="product-result-controls__category-name text-xl">
+            {{ collection.metafields.custom.subtitle | default: collection.title }}
+          </h2>
+          <div class="hidden sm:inline-block">
+            {{ amount }} {{ amount | pluralize: 'Item', 'Items' }}
+          </div>
+        </div>
+        <div class="collection-products grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6">
+          {% for product in collection.products %}
+            {% render 'product-card', product_card: product, index: forloop.index %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div>
+          {{ 'common.no_products' | t }}
+        </div>
+      {% endif %}
+
+
+      {%- comment -%}
+        {% render 'layout-pagination', paginate: paginate %}
+      {%- endcomment -%}
+      {% if paginate.pages > 1 %}
+        <renderless-pagination-products :pages="{{ paginate.pages }}" :current="{{ paginate.current_page }}" :limit="{{ limit }}" :handle="'{{ collection.handle }}'" :target="'.collection-products'" :url="'{{  collection.url }}'" v-slot="{ loadMore, text, show }">
+          <div v-if="show.value" class="pagination flex items-center justify-center">
+            <button v-if="text.value" @click="loadMore" class="button uppercase px-10 py-5 tracking-widest font-bn mt-10 text-white bg-red-50 hover:bg-red-500" v-html="text.value"></button>
+          </div>
+        </renderless-pagination-products>
+      {% endif %}
+
+    {% endpaginate %}
+  </div>
 </div>
 
 {% stylesheet %}
@@ -55,3 +67,108 @@
     display: none;
   }
 {% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Colection",
+    "class": "section-collection",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "info": "Required."
+          },
+          {
+            "type": "collection",
+            "id": "collection_1",
+            "label": "Collection 1"
+          },
+          {
+            "type": "collection",
+            "id": "collection_2",
+            "label": "Collection 2"
+          },
+          {
+            "type": "collection",
+            "id": "collection_3",
+            "label": "Collection 3"
+          }, {
+            "type": "collection",
+            "id": "collection_4",
+            "label": "Collection 4"
+          }, {
+            "type": "collection",
+            "id": "collection_5",
+            "label": "Collection 5"
+          }, {
+            "type": "collection",
+            "id": "collection_6",
+            "label": "Collection 6"
+          }, {
+            "type": "collection",
+            "id": "collection_7",
+            "label": "Collection 7"
+          }, {
+            "type": "collection",
+            "id": "collection_8",
+            "label": "Collection 8"
+          }, {
+            "type": "collection",
+            "id": "collection_9",
+            "label": "Collection9"
+          }, {
+            "type": "collection",
+            "id": "collection_10",
+            "label": "Collection 10"
+          }, {
+            "type": "collection",
+            "id": "collection_11",
+            "label": "Collection 11"
+          }, {
+            "type": "collection",
+            "id": "collection_12",
+            "label": "Collection 12"
+          }, {
+            "type": "collection",
+            "id": "collection_13",
+            "label": "Collection 13"
+          }, {
+            "type": "collection",
+            "id": "collection_14",
+            "label": "Collection 14"
+          }, {
+            "type": "collection",
+            "id": "collection_15",
+            "label": "Collection 15"
+          }, {
+            "type": "collection",
+            "id": "collection_16",
+            "label": "Collection 16"
+          }, {
+            "type": "collection",
+            "id": "collection_17",
+            "label": "Collection 17"
+          }, {
+            "type": "collection",
+            "id": "collection_18",
+            "label": "Collection 18"
+          }, {
+            "type": "collection",
+            "id": "collection_19",
+            "label": "Collection 19"
+          }, {
+            "type": "collection",
+            "id": "collection_20",
+            "label": "Colection 20"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -32,7 +32,7 @@ export default {
     const { pages, current, limit, handle, url, target } = toRefs(props);
     console.log(limit, handle, url, target);
     const count = ref(1);
-    const oldCount = ref(limit.value + 1);
+    const oldCount = ref(limit.value);
     const counter = ref(parseInt(current.value, 10) + 1);
     const maxCount = ref(pages.value + 1);
     const text = ref("Load More");
