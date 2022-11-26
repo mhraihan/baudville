@@ -1,6 +1,10 @@
 <template>
   <div class="mb-0 related-products">
-    <div class="related-product w-100" v-html="products"></div>
+    <!-- eslint-disable vue/no-v-html -->
+    <div
+      class="related-product w-100"
+      v-html="products"
+    />
   </div>
 </template>
 <script>

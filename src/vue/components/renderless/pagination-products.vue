@@ -1,6 +1,6 @@
 <script>
 import { ref, toRefs } from "vue";
-import $ from "jquery";
+
 export default {
   props: {
     pages: {
@@ -36,7 +36,7 @@ export default {
 
     const loadMore = () => {
       const getURL = url.value + "?page=" + counter.value;
-      $.ajax({
+      window.jQuery.ajax({
         url: getURL,
         type: "GET",
         dataType: "html",
@@ -44,7 +44,9 @@ export default {
           text.value = "Loading More...";
         },
         success: function (data) {
-          $(target.value).append($(data).find(".product-summary"));
+          window
+            .jQuery(target.value)
+            .append(window.jQuery(data).find(".product-summary"));
         },
         error: function (e) {
           console.log(e);

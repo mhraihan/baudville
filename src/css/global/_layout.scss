@@ -56,6 +56,7 @@ li {
 
 /* override container width */
 .container {
+  @apply max-w-screen-xl;
   @include respond-to(xipad) {
     max-width: 98%;
   }

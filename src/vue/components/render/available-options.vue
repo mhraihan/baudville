@@ -1,6 +1,8 @@
 <template>
   <div class="mb-5 available-options">
-    <p class="mb-3 font-bold sentiments__heading">Available Options</p>
+    <p class="mb-3 font-bold sentiments__heading">
+      Available Options
+    </p>
     <div class="flex flex-wrap">
       <div
         v-for="(product, key) in products"
@@ -11,11 +13,11 @@
           v-if="product.featured_image"
           class="sentiments__button"
           :href="product.url"
-          ><img
-            :alt="product.title"
-            class="object-cover object-center w-16 h-16 sentiments__image"
-            :src="product.featured_image"
-          />
+        ><img
+          :alt="product.title"
+          class="object-cover object-center w-16 h-16 sentiments__image"
+          :src="product.featured_image"
+        >
         </a>
       </div>
     </div>

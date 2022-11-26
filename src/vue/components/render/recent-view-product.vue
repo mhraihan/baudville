@@ -1,11 +1,19 @@
 <template>
-  <div class="mb-5" v-if="products.length">
+  <div
+    v-if="products.length"
+    class="mb-5"
+  >
     <div class="container max-w-screen-xl">
-      <h2 class="text-center uppercase heading">You Recently Viewed</h2>
+      <h2 class="text-center uppercase heading">
+        You Recently Viewed
+      </h2>
       <div
         class="grid collection-products sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6"
       >
-        <div v-for="product in products" :key="product.id">
+        <div
+          v-for="product in products"
+          :key="product.id"
+        >
           <product-view :product="product" />
         </div>
       </div>
@@ -17,6 +25,9 @@ import dayjs from "dayjs";
 import { ref, toRefs } from "vue";
 import productView from "./product-view.vue";
 export default {
+  components: {
+    productView,
+  },
   props: {
     id: {
       type: [Number, String],
@@ -50,9 +61,6 @@ export default {
       type: String,
       required: true,
     },
-  },
-  components: {
-    productView,
   },
 
   setup(props) {
