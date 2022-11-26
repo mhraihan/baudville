@@ -1,55 +1,36 @@
 <template>
-  <div class="mb-5 available-options">
-    <p class="mb-3 font-bold sentiments__heading">
-      Available Options
-    </p>
-    <div class="flex flex-wrap">
-      <div
-        v-for="(product, key) in products"
-        :key="key"
-        class="pr-2 sentiments__item last:pr-0"
-      >
-        <a
-          v-if="product.featured_image"
-          class="sentiments__button"
-          :href="product.url"
-        ><img
-          :alt="product.title"
-          class="object-cover object-center w-16 h-16 sentiments__image"
-          :src="product.featured_image"
-        >
-        </a>
-      </div>
-    </div>
+  <div class="mb-0 related-products">
+    <div class="related-product w-100" v-html="products"></div>
   </div>
 </template>
 <script>
-import { ref, toRefs, onMounted } from "vue";
-import { shuffle } from "lodash";
+import { ref, toRefs } from "vue";
 export default {
   props: {
     id: {
       type: Number,
       required: true,
     },
+    section: {
+      type: String,
+      required: true,
+    },
   },
 
   setup(props) {
-    const { id } = toRefs(props);
+    const { id, section } = toRefs(props);
     const products = ref(null);
-
-    onMounted(() => {
-      fetch(
-        `${window.Shopify.routes.root}recommendations/products.json?product_id=${id.value}&limit=4&intent=related`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          products.value = shuffle(data.products);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    console.log(id.value);
+    fetch(
+      `/recommendations/products?section_id=${section.value}&product_id=${id.value}&limit=4`
+    )
+      .then((response) => response.text())
+      .then((text) => {
+        products.value = text;
+      })
+      .then(() => {
+        window.jQuery(`.product-recommendations .js-video-button`).modalVideo();
+      });
     return {
       products,
     };

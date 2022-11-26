@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "isCustomElement": "product-recommendations",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
