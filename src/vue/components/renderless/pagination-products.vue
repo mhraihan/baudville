@@ -15,10 +15,6 @@ export default {
       type: [String, Number],
       required: true,
     },
-    handle: {
-      type: String,
-      required: true,
-    },
     url: {
       type: String,
       required: true,
@@ -29,8 +25,8 @@ export default {
     },
   },
   setup(props, { slots }) {
-    const { pages, current, limit, handle, url, target } = toRefs(props);
-    console.log(limit, handle, url, target);
+    const { pages, current, limit, url, target } = toRefs(props);
+
     const count = ref(1);
     const oldCount = ref(limit.value);
     const counter = ref(parseInt(current.value, 10) + 1);
@@ -61,7 +57,7 @@ export default {
           oldCount.value = oldCount.value * count.value;
           counter.value++;
           count.value++;
-          console.log(oldCount.value);
+
           window.theme.modalVideo.init(oldCount.value);
           if (counter.value == maxCount.value) {
             show.value = false;
@@ -69,9 +65,6 @@ export default {
         },
       });
     };
-    console.log("Pages: " + url.value);
-    console.log("Pages Found: " + pages.value);
-    console.log("current Pages:  " + counter.value);
 
     return () =>
       slots.default({

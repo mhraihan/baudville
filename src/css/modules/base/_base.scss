@@ -1,5 +1,5 @@
 body {
-  font-family: "Montserrat", sans-serif;
+  @include font-mont();
   @apply text-gray-100;
   a {
     @apply text-green-100;
@@ -11,15 +11,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bebas Neue", cursive;
+  @include font-bn();
   @apply text-gray-100;
 }
+.heading {
+  @apply mb-4 font-light text-green-50 text-5xl;
+  @include font-bn();
+  font-size: 45px;
+}
 .main-menu {
-  font-family: "Bebas Neue", cursive;
+  @include font-bn();
 }
 
 .heading-font {
-  font-family: "Bebas Neue", cursive;
+  @include font-bn();
 }
 .header-top {
   @apply bg-gray-100;
