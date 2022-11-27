@@ -66,3 +66,15 @@
     background: #f2f3f3;
   }
 }
+figure.zoom {
+  background-position: 50% 50%;
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  img {
+    @apply block w-full transition-opacity duration-100;
+    @include hover-content() {
+      @apply opacity-0;
+    }
+  }
+}

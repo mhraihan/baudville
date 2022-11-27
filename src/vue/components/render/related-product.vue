@@ -24,7 +24,6 @@ export default {
   setup(props) {
     const { id, section } = toRefs(props);
     const products = ref(null);
-    console.log(id.value);
     fetch(
       `/recommendations/products?section_id=${section.value}&product_id=${id.value}&limit=4`
     )
