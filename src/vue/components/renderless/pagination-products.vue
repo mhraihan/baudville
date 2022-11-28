@@ -55,7 +55,7 @@ export default {
           text.value = "Load More";
           // wishlist.reinit();
           // quickAdd.reinit();
-          // quickview.reinit();
+          window.theme.quickview.reinit();
           oldCount.value = oldCount.value * count.value;
           counter.value++;
           count.value++;

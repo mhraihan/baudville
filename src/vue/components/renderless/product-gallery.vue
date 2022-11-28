@@ -23,6 +23,11 @@ export default {
         alt: $el.target.dataset.alt || "",
       };
       zoomImage.value.url = $el.target.dataset.zoom;
+      window
+        .jQuery($el.target)
+        .addClass("pointer-events-none")
+        .siblings(".thumb-image")
+        .removeClass("pointer-events-none");
     };
 
     const move = ($el) => {
