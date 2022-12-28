@@ -78,3 +78,9 @@ figure.zoom {
     }
   }
 }
+
+.configurator-options__steps {
+  @include respond-to(large) {
+    @apply right-0 bottom-0 left-0 border-none transition-transform duration-200;
+  }
+}
