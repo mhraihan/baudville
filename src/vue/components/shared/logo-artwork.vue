@@ -2,7 +2,7 @@
   <DivContainer>
     <h3 class="flex items-end mb-2 text-2xl uppercase">
       Add your logo or artwork
-      <span class="mb-1 ml-2 font-sans text-sm normal-case primary-color"
+      <span class="mb-1 ml-2 text-sm normal-case primary-color"
         >(Optional)</span
       >
     </h3>
@@ -40,9 +40,9 @@
         <div class="flex items-center mb-4 button-property">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
             <input
-              type="radio"
               id="upload-logo[no]"
               v-model="uploadLogo"
+              type="radio"
               :value="false"
             />
           </div>
@@ -55,9 +55,9 @@
         <div class="flex items-center mb-4 button-property">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
             <input
-              type="radio"
               id="upload-logo[yes]"
               v-model="uploadLogo"
+              type="radio"
               :value="true"
             />
           </div>
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div v-if="uploadLogo" class="border-2 border-gray-200 p2">
+    <div v-if="uploadLogo" class="border-2 border-gray-200 p-2 mb-10">
       <div class="bg-white">
         <DropZone url="https://www.baudville.com/submit_logo_customization" />
       </div>

@@ -5,18 +5,22 @@
       class="relative h-full bg-gray-600 configurator-options__steps"
       :class="step === 1 ? 'configurator-options__steps--active' : ''"
     >
-      <StepHeader @back="$emit('back')" :name="option.name" />
+      <StepHeader :name="option.name" @back="$emit('back')" />
       <StepFooter
-        @next="$emit('next')"
-        @back="$emit('back')"
         class="bg-white"
         :step="step"
+        @next="$emit('next')"
+        @back="$emit('back')"
       />
       <MessageOptions
-        :options="option.options"
         v-if="option.category === 'Message Options'"
+        :options="option.options"
+        :type="option.type"
       />
-      <PersonalizationOption v-if="option.category === 'Personalization'" />
+      <PersonalizationOption
+        v-if="option.category === 'Personalization'"
+        :lines="option.lines"
+      />
       <LogoArtwork v-if="option.category === 'logo'" />
       <StepApproval v-if="option.category === 'approval'" />
     </div>

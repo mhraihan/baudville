@@ -11,28 +11,30 @@
         </div>
         <div class="w-full">
           <select
-            @change="change($event)"
             :id="'option-' + option.id"
             class="w-full px-4 py-2 border-gray-200 focus:ring-0 focus:outline-none"
+            @change="change($event)"
           >
             <option
               v-for="(setting, key) in option.settings"
               :key="key"
               :value="JSON.stringify(setting)"
               v-text="setting.name"
-            ></option>
+            />
           </select>
         </div>
       </div>
       <div
+        v-if="text"
         class="mt-8 text-sm font-medium leading-6 text-center text-gray-100 font-mont"
         v-html="text"
-      ></div>
+      />
     </div>
   </DivContainer>
 </template>
 <script>
 import { ref } from "vue";
+import { useStore } from "vuex";
 import DivContainer from "./div-container.vue";
 
 export default {
@@ -43,14 +45,18 @@ export default {
       type: Object,
       required: true,
     },
+    type: {
+      type: String,
+      default: "select",
+    },
   },
   setup(props) {
-    const sentiment = ref(props?.options[0]?.settings[0]);
-    const text = ref(props?.options[0]?.settings[0]?.content);
+    const store = useStore();
+    const text = ref(props?.options[0]?.settings[0]?.description);
     const change = (event) => {
       const setting = JSON.parse(event.target.value);
-      console.log(setting.name);
-      text.value = setting.content;
+      text.value = setting.description;
+      store.dispatch("saveScene7Id", setting.value);
     };
 
     return {

@@ -1,4 +1,4 @@
-<div class="container max-w-screen-xl ">
+{% comment %} <div class="container max-w-screen-xl ">
   <div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
     {% if recommendations.performed and recommendations.products_count > 0 %}
       <h2 class="text-center uppercase product-recommendations__heading heading">{{ section.settings.title | escape }}</h2>
@@ -31,4 +31,4 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %} {% endcomment %}

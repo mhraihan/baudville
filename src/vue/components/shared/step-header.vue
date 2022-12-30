@@ -1,7 +1,7 @@
 <template>
   <button
-    @click="$emit('back')"
     class="relative flex justify-center w-full p-3 text-xl text-white uppercase primary-bg heading-font"
+    @click="$emit('back')"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@
 </template>
 <script>
 export default {
-  name: "step-header",
+  name: "StepHeader",
   props: {
     name: {
       type: String,

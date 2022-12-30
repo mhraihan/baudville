@@ -1,11 +1,11 @@
 <template>
   <button
-    @click="$emit('stepChange')"
     class="flex items-center justify-between w-full text-xl text-white bg-teal-100 border-b-2 border-white heading-font p-7"
+    @click="$emit('stepChange')"
   >
     <span class="flex items-center">
       <span
-        class="flex items-center justify-center w-5 h-5 mr-2 text-sm font-bold text-teal-100 bg-white rounded-full"
+        class="flex items-center justify-center w-6 h-6 mr-4 text-sm font-bold text-teal-100 bg-white rounded-full"
         >{{ step_number }}</span
       >
       <span>{{ name }}</span>
@@ -30,7 +30,7 @@
 </template>
 <script>
 export default {
-  name: "step-button",
+  name: "StepButton",
   props: {
     name: {
       type: String,

@@ -1,99 +1,106 @@
 <template>
   <DivContainer>
-    <div
-      class="px-0 pt-2 pb-4 mb-4 border-b border-teal-200 configurator-step__description"
-    >
+    <div class="px-0 pt-2 pb-4 mb-4 border-b border-teal-200">
       <div>Personalization is free for this item</div>
     </div>
-    <div class="pb-12 configurator-personalizations">
-      <div class="configurator-personalizations__toggle">
-        <div class="flex items-center mb-4 button-property">
+    <div class="pb-12">
+      <div class="">
+        <div class="flex items-center mb-4">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
             <input
-              type="radio"
               id="personalization[no]"
+              v-model="personalization"
+              type="radio"
               name="personalization-toggle"
               :value="false"
-              v-model="personalization"
             />
           </div>
-          <label
-            for="personalization[no]"
-            class="text-sm font-bold button-property__name"
-            ><span class="button-property__text"
-              >No Personalization</span
-            ></label
+          <label for="personalization[no]" class="text-sm font-bold"
+            ><span class="">No Personalization</span></label
           >
         </div>
-        <div class="flex items-center mb-4 button-property">
+        <div class="flex items-center mb-4">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
             <input
-              type="radio"
               id="personalization[yes]"
-              name="personalization[yes]"
               v-model="personalization"
+              type="radio"
+              name="personalization[yes]"
               :value="true"
             />
           </div>
-          <label
-            for="personalization[yes]"
-            class="text-sm font-bold button-property__name"
-            ><span class="button-property__text"
-              >Personalization - Enter text below</span
-            ></label
+          <label for="personalization[yes]" class="text-sm font-bold"
+            ><span class="">Personalization - Enter text below</span></label
           >
         </div>
       </div>
-      <div
-        v-if="personalization"
-        class="configurator-personalizations__property property configurator-personalizations__property--lineText"
-        index="0"
-      >
+      <div v-if="personalization" class="">
         <PriceTable />
-        <p class="flex justify-end configurator-personalizations__add-quantity">
+        <p @click="add" class="flex justify-end">
           <button class="tracking-wide button button-product font-bn !text-xl">
             + Add Another
           </button>
         </p>
         <div
-          class="pt-4 mt-4 border-t border-teal-200 configurator-quantity-group configurator-quantity-group--is-active"
+          :class="items.length < 2 && 'pt-4 mt-4 border-t border-teal-200'"
+          class=""
         >
-          <div
-            class="flex items-center mb-4 configurator-quantity-group__header"
-          >
-            <h3
-              class="heading heading--6 heading--center configurator-quantity-group__name hidden !text-xl font-bold leading-none flex-col !mb-0"
+          <div v-for="(item, key) in items" :key="key">
+            <div
+              v-if="key !== index"
+              class="pt-4 mt-4 border-t border-teal-200 flex items-center mb-4"
             >
-              <span class="text-gray-100">Item 1</span>
-              <span class="text-base">(Edit)</span>
-            </h3>
-            <div class="ml-4">
-              <span class="pr-1 font-medium font-capitalize">Line 1:</span>
-              <span class="font-medium font-capitalize">Awarded To</span>
-            </div>
-          </div>
-          <div class="configurator-quantity-group__inputs">
-            <div class="flex w-full mb-4" v-for="i in 3" :key="i">
-              <label for="line1" class="w-24 py-2 text-sm font-bold"
-                ><span class="property__text">Line {{ i }}</span></label
+              <h3
+                class="heading heading--6 heading--center flex !text-xl font-bold leading-none flex-col !mb-0"
               >
-              <div class="flex flex-col w-full px-2">
-                <input
-                  type="text"
-                  id="line1"
-                  name="line1"
-                  maxlength="26"
-                  class="w-full h-12 px-3 py-1 border border-gray-400 rounded"
-                />
-                <p>26 characters remaining</p>
+                <span class="text-gray-100">Item {{ key + 1 }}</span>
+                <span @click="edit(key)" class="text-base cursor-pointer"
+                  >(Edit)</span
+                >
+              </h3>
+              <div class="flex flex-col ml-4">
+                <div
+                  class="mb-1"
+                  v-for="(value, index) in Object.values(item)"
+                  :key="index"
+                >
+                  <span v-if="value" class="pr-1 font-medium font-capitalize"
+                    >Line {{ index + 1 }}:</span
+                  >
+                  <span v-if="value" class="font-medium font-capitalize">{{
+                    value
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="hidden configurator-quantity-group__actions">
-            <button disabled="disabled" class="button button--secondary">
+          <div class="" :class="items.length > 1 && 'p-4 bg-white rounded'">
+            <h3
+              v-if="items.length > 1"
+              class="heading heading--6 heading--center flex !text-xl font-bold leading-none flex-col"
+            >
+              <span class="text-gray-100">Item {{ index + 1 }}</span>
+            </h3>
+            <StepInput
+              v-for="(line, index) in lines"
+              :key="index"
+              :id="`line${index + 1}`"
+              :labelText="`Line ${index + 1}`"
+              :line="line"
+              v-model="item[`line${index + 1}`]"
+            />
+          </div>
+          <div
+            v-if="items.length > 1"
+            class="configurator-quantity-group__actions mt-4"
+          >
+            <button
+              @click="remove(index)"
+              class="bg-white button button-secondary !font-bold font-mont !border-2 border-gray-100 color-gray-100 hover:bg-gray-100"
+            >
               - Remove
             </button>
-            <p>This product has a minimum quantity of 1</p>
+            <p class="hidden">This product has a minimum quantity of 1</p>
           </div>
         </div>
       </div>
@@ -101,23 +108,71 @@
   </DivContainer>
 </template>
 <script>
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import DivContainer from "./div-container.vue";
 import PriceTable from "./price-table.vue";
-
+import StepInput from "./step-input.vue";
+import { useStore } from "vuex";
 export default {
-  props: {},
+  components: { DivContainer, PriceTable, StepInput },
+  props: {
+    lines: {
+      type: Object,
+      required: true,
+    },
+  },
   setup() {
+    const store = useStore();
     const personalization = ref(true);
+    const item = ref({});
+    const items = computed(() => store.getters.getItems);
+    const index = ref(items.value.length - 1);
+    item.value = {
+      ...item.value,
+      ...store.getters.getLastItem,
+    };
+    const update = () => {
+      items.value = computed(() => store.getters.getItems);
+      index.value = items.value.length - 1;
+    };
+    const add = () => {
+      store.dispatch("saveItems", { ...item.value });
+      update();
+    };
+    const edit = (key) => {
+      index.value = key;
+      const getItem = { ...store.getters.getItemById(key) };
+      item.value.line1 = getItem.line1;
+      item.value.line2 = getItem.line2;
+      item.value.line3 = getItem.line3;
+      item.value.line4 = getItem.line4;
+      item.value.line5 = getItem.line5;
+      item.value.line6 = getItem.line6;
+    };
+
+    const remove = (key) => {
+      const idx = key - 1 >= 0 ? key - 1 : 0;
+      store.dispatch("deleteItem", key);
+      update();
+
+      edit(idx);
+    };
+    watch(item.value, () => {
+      store.dispatch("updateItem", {
+        item: { ...item.value },
+        index: index.value,
+      });
+    });
+    console.log(store.getters.getLastItem);
     return {
       personalization,
+      item,
+      items,
+      add,
+      edit,
+      remove,
+      index,
     };
   },
-  components: { DivContainer, PriceTable },
 };
 </script>
-<style scoped>
-.configurator-quantity-group--is-active .configurator-quantity-group__name {
-  display: flex;
-}
-</style>
