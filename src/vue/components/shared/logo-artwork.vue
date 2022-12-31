@@ -90,7 +90,7 @@ import "dropzone-vue/dist/dropzone-vue.common.css";
 export default {
   components: { DivContainer, DropZone },
   setup() {
-    const uploadLogo = ref(true);
+    const uploadLogo = ref(false);
     return {
       uploadLogo,
     };

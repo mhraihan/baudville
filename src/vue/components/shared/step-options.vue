@@ -11,6 +11,7 @@
         :step="step"
         @next="$emit('next')"
         @back="$emit('back')"
+        @addCart="$emit('add-cart')"
       />
       <MessageOptions
         v-if="option.category === 'Message Options'"

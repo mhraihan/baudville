@@ -1,8 +1,8 @@
 <template>
   <div class="container relative mx-auto my-6">
     <div class="flex border border-teal-100">
-      <div class="w-7/12 px-12">
-        <img :src="url" alt="" />
+      <div class="w-7/12 px-12" :class="loading && 'opacity-50'">
+        <img :src="url" alt="" :class="loading && 'opacity-50'" />
       </div>
       <div class="w-5/12 border-l border-teal-100">
         <div v-if="step === 0">
@@ -32,6 +32,8 @@
           :index="index + 1"
           :step="step"
           :option="option"
+          :url="url"
+          @addCart="addCart"
           @back="step = 0"
           @next="step = step + 1"
         />
@@ -41,10 +43,12 @@
 </template>
 
 <script>
+import { pickBy, debounce } from "lodash";
 import { useStore } from "vuex";
 import { ref, computed, reactive, toRefs, watch } from "vue";
 import StepButton from "../shared/step-button.vue";
 import StepOptions from "../shared/step-options.vue";
+
 export default {
   components: {
     StepButton,
@@ -54,12 +58,18 @@ export default {
     image: {
       type: String,
     },
+    variant: {
+      type: Object,
+      required: true,
+    },
   },
   setup(props) {
     const store = useStore();
-    const { image } = toRefs(props);
-
+    const { image, variant } = toRefs(props);
+    console.log(variant.value);
+    const loading = ref(false);
     const scene7Id = computed(() => store.getters.getScene7Id);
+    const items = computed(() => store.getters.getItems);
 
     const personalization = ref({
       steps: {
@@ -212,7 +222,7 @@ export default {
         category: "approval",
       },
     ]);
-    const step = ref(2);
+    const step = ref(0);
     const current = ref(null);
     const url = ref(image.value);
     const sentiment = ref(null);
@@ -259,35 +269,85 @@ export default {
       ],
     });
 
-    const dynamicImage = () => {
-      return `https://s7d7.scene7.com/is/image/Baudville/${personalization.value.images[1].value}?$fn=&$line1=&$line1fs=112&$line2=&$line2fs=80&$line3=&$line3fs=80&$line4=&$line5=&$line6=&$linelp=&layer=0&src=is{Baudville/${personalization.value.images[0].value}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}&layer=3&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
+    const dynamicImage = (line) => {
+      const src = `https://s7d7.scene7.com/is/image/Baudville/${personalization.value.images[1].value}?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${line.line2}&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${line.line4}&$line5=${line.line5}&$line6=${line.line6}&$linelp=&layer=0&src=is{Baudville/${personalization.value.images[0].value}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}&layer=3&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
 
-      // this.url = `https://s7d7.scene7.com/is/image/Baudville/${this.product.scene7_image_id}?$fn=&$linelp=&layer=0&src=is{Baudville/${this.product.scene7_image_id}}&layer=1&hide=0&op_colorize=939393&src=is{Baudville/${this.customization.sentiment}}&layer=2&op_colorize=939393&layer=3&op_colorize=939393&layer=4&op_colorize=939393`;
-
-      // this.url += `&$line1=${this.customization.lines[0].line}&$line1fs=${this.customization.lines[0].size}`;
-      // this.url += `&$line2=${this.customization.lines[1].line}&$line2fs=${this.customization.lines[1].size}`;
-      // this.url += `&$line3=${this.customization.lines[2].line}&$line3fs=${this.customization.lines[2].size}`;
-      // this.url += `&$line4=${this.customization.lines[3].line}&$line4fs=${this.customization.lines[3].size}`;
-      // this.url += `&$line5=${this.customization.lines[4].line}&$line5fs=${this.customization.lines[4].size}`;
-      // this.url += `&$line6=${this.customization.lines[5].line}&$line6fs=${this.customization.lines[5].size}`;
+      loading.value = false;
+      return src;
     };
+    const addCart = () => {
+      const signOff = ref(store.getters.signOff);
+      if (!signOff.value?.length) {
+        store.dispatch("saveSignOffEror", true);
+      }
+      if (variant.value.available && signOff.value?.length) {
+        store.dispatch("saveSignOffEror", false);
+        let formData = {
+          items: [
+            {
+              quantity: store.getters.getItemSize + 1,
+              id: variant.value.id,
+              properties: {
+                image: url.value,
+                instructions: store.getters.instructions,
+                signOff: signOff?.value,
+                Personalization: items.value,
+              },
+            },
+          ],
+        };
 
-    watch([scene7Id], () => {
-      url.value = dynamicImage();
+        fetch("/cart/add.js", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then(async (data) => {
+            console.log(data);
+            // await Shopify.onItemAdded().then(() => {
+            //   this.loading = false;
+            // });
+
+            // this.resetData();
+            // window.location = "/cart";
+            alert("Product added to the cart successfully!");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            // this.errors();
+          });
+      } else {
+        // alert("Product is not available");
+      }
+      console.log("addCart");
+    };
+    watch([scene7Id, items.value], () => {
+      loading.value = true;
+      url.value = dynamicImage(store.getters.getLastItem);
     });
     return {
       step,
       steps,
       personalization,
       current,
+      loading,
       url,
       sentiment,
       customizations,
       customization,
+      addCart,
     };
   },
   mounted() {
-    console.log(this.step); // 0
+    const store = useStore();
+    const options = pickBy(this.steps, { category: "Message Options" });
+    // this.scene7Id = options[0].options[0].settings[0].value;
+    store.dispatch("saveScene7Id", options[0].options[0].settings[0].value);
   },
 };
 </script>

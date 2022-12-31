@@ -163,7 +163,6 @@ export default {
         index: index.value,
       });
     });
-    console.log(store.getters.getLastItem);
     return {
       personalization,
       item,

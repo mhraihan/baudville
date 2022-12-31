@@ -5,14 +5,17 @@ const state = {
   scene7Id: null,
   items: [
     {
-      line1: null,
-      line2: null,
-      line3: null,
-      line4: null,
-      line5: null,
-      line6: null,
+      line1: "",
+      line2: "",
+      line3: "",
+      line4: "",
+      line5: "",
+      line6: "",
     },
   ],
+  instructions: "",
+  signOff: null,
+  signOffError: false,
 };
 
 /**
@@ -25,6 +28,9 @@ const getters = {
   getItems(state) {
     return state.items;
   },
+  getItemSize(state) {
+    return state.items.length - 1;
+  },
   getItemById: (state) => (id) => {
     return state.items[id];
   },
@@ -32,6 +38,15 @@ const getters = {
     if (state.items.length > 0) {
       return state.items.slice(-1).pop();
     }
+  },
+  instructions(state) {
+    return state.instructions;
+  },
+  signOff(state) {
+    return state.signOff;
+  },
+  signOffError(state) {
+    return state.signOffError;
   },
 };
 
@@ -52,6 +67,15 @@ const mutations = {
   DELETE_ITEMS(state, index) {
     state.items.splice(index, 1);
   },
+  SAVE_INSTRUCTIONS(state, text) {
+    state.instructions = text;
+  },
+  SAVE_SIGN_OFF(state, text) {
+    state.signOff = text;
+  },
+  SAVE_SIGN_OFF_ERROR(state, bool) {
+    state.signOffError = bool;
+  },
 };
 
 /**
@@ -70,6 +94,15 @@ const actions = {
   },
   deleteItem({ commit }, index) {
     commit("DELETE_ITEMS", index);
+  },
+  saveInstructions({ commit }, text) {
+    commit("SAVE_INSTRUCTIONS", text);
+  },
+  saveSignOff({ commit }, text) {
+    commit("SAVE_SIGN_OFF", text);
+  },
+  saveSignOffEror({ commit }, bool) {
+    commit("SAVE_SIGN_OFF_ERROR", bool);
   },
 };
 
