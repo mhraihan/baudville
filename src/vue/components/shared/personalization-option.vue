@@ -126,21 +126,23 @@ export default {
     const personalization = ref(true);
     const item = ref({});
     const items = computed(() => store.getters.getItems);
-    const index = ref(items.value.length - 1);
+    const index = ref(0);
     item.value = {
       ...item.value,
       ...store.getters.getLastItem,
     };
     const update = () => {
-      items.value = computed(() => store.getters.getItems);
-      index.value = items.value.length - 1;
+      index.value = store.getters.getItemSize;
+      store.dispatch("updateActiveIndex", index.value);
     };
     const add = () => {
       store.dispatch("saveItems", { ...item.value });
+
       update();
     };
     const edit = (key) => {
       index.value = key;
+      store.dispatch("updateActiveIndex", key);
       const getItem = { ...store.getters.getItemById(key) };
       item.value.line1 = getItem.line1;
       item.value.line2 = getItem.line2;
@@ -163,6 +165,7 @@ export default {
         index: index.value,
       });
     });
+
     return {
       personalization,
       item,

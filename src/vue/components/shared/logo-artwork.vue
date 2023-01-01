@@ -74,7 +74,10 @@
 
     <div v-if="uploadLogo" class="border-2 border-gray-200 p-2 mb-10">
       <div class="bg-white">
-        <DropZone url="https://www.baudville.com/submit_logo_customization" />
+        <DropZone
+          @sending="sending"
+          url="https://www.baudville.com/submit_logo_customization"
+        />
       </div>
     </div>
   </DivContainer>
@@ -82,6 +85,7 @@
 <script>
 import DivContainer from "./div-container.vue";
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 import DropZone from "dropzone-vue";
 
@@ -90,9 +94,22 @@ import "dropzone-vue/dist/dropzone-vue.common.css";
 export default {
   components: { DivContainer, DropZone },
   setup() {
+    const store = useStore();
     const uploadLogo = ref(false);
+    const sending = (files, xhr, formData) => {
+      function callback(e) {
+        console.log(JSON.parse(e));
+        store.dispatch("saveArtwork", JSON.parse(e));
+      }
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          callback(xhr.response);
+        }
+      };
+    };
     return {
       uploadLogo,
+      sending,
     };
   },
 };

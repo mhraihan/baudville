@@ -13,9 +13,11 @@ const state = {
       line6: "",
     },
   ],
+  activeIndex: 0,
   instructions: "",
   signOff: null,
   signOffError: false,
+  artwork: {},
 };
 
 /**
@@ -24,6 +26,12 @@ const state = {
 const getters = {
   getScene7Id(state) {
     return state.scene7Id;
+  },
+  getArtwork(state) {
+    return state.artwork;
+  },
+  getActiveIndex(state) {
+    return state.activeIndex;
   },
   getItems(state) {
     return state.items;
@@ -57,7 +65,12 @@ const mutations = {
   SAVE_SCENE7_ID(state, id) {
     state.scene7Id = id;
   },
-
+  SAVE_ARTWORK(state, artwork) {
+    state.artwork = artwork;
+  },
+  UPDATE_ACTIVE_INDEX(state, index) {
+    state.activeIndex = index;
+  },
   SAVE_ITEMS(state, item) {
     state.items.push(item);
   },
@@ -85,7 +98,12 @@ const actions = {
   saveScene7Id({ commit }, id) {
     commit("SAVE_SCENE7_ID", id);
   },
-
+  saveArtwork({ commit }, artwork) {
+    commit("SAVE_ARTWORK", artwork);
+  },
+  updateActiveIndex({ commit }, index) {
+    commit("UPDATE_ACTIVE_INDEX", index);
+  },
   saveItems({ commit }, item) {
     commit("SAVE_ITEMS", item);
   },

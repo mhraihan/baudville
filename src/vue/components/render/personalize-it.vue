@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { pickBy, debounce } from "lodash";
+import { pickBy } from "lodash";
 import { useStore } from "vuex";
 import { ref, computed, reactive, toRefs, watch } from "vue";
 import StepButton from "../shared/step-button.vue";
@@ -66,9 +66,10 @@ export default {
   setup(props) {
     const store = useStore();
     const { image, variant } = toRefs(props);
-    console.log(variant.value);
+
     const loading = ref(false);
     const scene7Id = computed(() => store.getters.getScene7Id);
+    const artwork = computed(() => store.getters.getArtwork);
     const items = computed(() => store.getters.getItems);
 
     const personalization = ref({
@@ -104,6 +105,12 @@ export default {
           template: true,
           value: "BV_73545_TEMP",
           name: "TEMPLATE",
+          default: false,
+        },
+        {
+          template: true,
+          value: "BV_73545_TEMPL",
+          name: "TEMPLATE_LOGO",
           default: false,
         },
       ],
@@ -270,7 +277,29 @@ export default {
     });
 
     const dynamicImage = (line) => {
-      const src = `https://s7d7.scene7.com/is/image/Baudville/${personalization.value.images[1].value}?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${line.line2}&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${line.line4}&$line5=${line.line5}&$line6=${line.line6}&$linelp=&layer=0&src=is{Baudville/${personalization.value.images[0].value}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}&layer=3&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
+      let src = `https://s7d7.scene7.com/is/image/Baudville/${
+        artwork.value?.image_path
+          ? personalization.value.images[2].value
+          : personalization.value.images[2].value
+      }?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${
+        line.line2
+      }&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${
+        line.line4
+      }&$line5=${line.line5}&$line6=${
+        line.line6
+      }&$linelp=&layer=0&src=is{Baudville/${
+        personalization.value.images[0].value
+      }}&layer=1&hide=0&op_colorize=${
+        personalization.value.template_color
+      }&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${
+        personalization.value.template_color
+      }`;
+
+      if (artwork.value?.image_path) {
+        src += `&layer=3&src=is{${artwork.value?.image_path}}`;
+      }
+
+      src += `&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
 
       loading.value = false;
       return src;
@@ -326,9 +355,10 @@ export default {
       }
       console.log("addCart");
     };
-    watch([scene7Id, items.value], () => {
+    watch([scene7Id, items.value, artwork], () => {
       loading.value = true;
-      url.value = dynamicImage(store.getters.getLastItem);
+      const key = store.getters.getActiveIndex;
+      url.value = dynamicImage(store.getters.getItemById(key));
     });
     return {
       step,
