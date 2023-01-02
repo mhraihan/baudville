@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { pickBy } from "lodash";
+import { pickBy, filter } from "lodash";
 import { useStore } from "vuex";
 import { ref, computed, toRefs, watch } from "vue";
 import StepButton from "../shared/step-button.vue";
@@ -69,9 +69,10 @@ export default {
 
     const loading = ref(false);
     const scene7Id = computed(() => store.getters.getScene7Id);
+    const emblem = computed(() => store.getters.getEmblem);
     const artwork = computed(() => store.getters.getArtwork);
     const items = computed(() => store.getters.getItems);
-
+    const activeLayout = computed(() => store.getters.getLayout);
     const personalization = ref({
       steps: [
         {
@@ -82,70 +83,118 @@ export default {
             {
               id: 1,
               label: "Choose Your Sentiment",
+              category: "sentiment",
               settings: [
                 {
-                  description:
-                    "<p>Awarded To</p><p>LINE 1 TEXT HERE</p><p>for an absolutely exceptional performance. Your efforts have resulted in an impressive achievement. Congratulations on a job well done! <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X02",
-                  name: "Above and Beyond: Congratulations",
+                  name: "Above and Beyond - Formal",
+                  layouts: [
+                    { layout: "L", value: "35237_SCRIPT_AB" },
+                    { layout: "P", value: "71159_SCRIPT_AB" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Above and Beyond - Fun",
+                  layouts: [
+                    { layout: "L", value: "35237_CARTWHEEL_AB" },
+                    { layout: "P", value: "71159_CARTWHEEL_AB" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Above and Beyond - Informal",
+                  layouts: [
+                    { layout: "L", value: "35237_BLAZE_AB" },
+                    { layout: "P", value: "71159_BLAZE_AB" },
+                  ],
                   default: true,
                 },
                 {
-                  description:
-                    "<p>Awarded To</p><p>LINE 1 TEXT HERE</p><p>for meeting and exceeding the highest standards. Youve surpassed expectations and reached for the stars. <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X01",
-                  name: "Above and Beyond: Quality Performance",
+                  name: "Achievement - Classic",
+                  layouts: [
+                    { layout: "L", value: "35237_BANNER_ACHIEV" },
+                    { layout: "P", value: "71159_BANNER_ACHIEV" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Awarded To</p><p>LINE 1 TEXT HERE</p><p>for consistently producing at the highest levels. Youve exhibited great ambition and a drive to excel in all that you do.<br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X04",
-                  name: "Achievement: Producing at the Highest Level",
+                  name: "Achievement - Formal",
+                  layouts: [
+                    { layout: "L", value: "35237_SCRIPT_ACHIEVE" },
+                    { layout: "P", value: "71159_SCRIPT_ACHIEVE" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Awarded To</p><p>LINE 1 TEXT HERE</p><p>for a truly extraordinary achievement. Your accomplishments have set an inspiring example. Congratulations on your well-deserved success.<br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X03",
-                  name: "Achievement: Setting a High Standard",
+                  name: "Achievement - Informal",
+                  layouts: [
+                    { layout: "L", value: "35237_BLAZE_ACHIEV" },
+                    { layout: "P", value: "71159_BLAZE_ACHIEV" },
+                  ],
+                  default: false,
+                },
+              ],
+            },
+            {
+              id: 2,
+              label: "Choose An Emblem",
+              category: "emblem",
+              settings: [
+                {
+                  name: "Apple Star",
+                  layouts: [
+                    { layout: "L", value: "35237_APPLESTAR" },
+                    { layout: "P", value: "71159_APPLESTAR" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Presented To</p><p>LINE 1 TEXT HERE</p><p>Your selfless dedication goes above and beyond hard work. Thank you for the heart you put into your work. Today and every day we recognize the risk you take and the care you give. Thank you. <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X37",
-                  name: "Amazing Caregiver",
+                  name: "Cadusceus",
+                  layouts: [
+                    { layout: "L", value: "35237_CADUSCEUS" },
+                    { layout: "P", value: "71159_CADUSCEUS" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Presented To</p><p>LINE 1 TEXT HERE</p><p>with gratitude for your significant contributions. Your efforts have made a difference to our organization. Thank you for all you do.   <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X24",
-                  name: "Appreciation Award",
+                  name: "Cross",
+                  layouts: [
+                    { layout: "L", value: "35237_CROSS" },
+                    { layout: "P", value: "71159_CROSS" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Awarded To</p><p>LINE 1 TEXT HERE</p><p>For your outstanding dedication to the performance of our organization's mission and all that we strive for; thank you for your tireless commitment to your team, to your work, and to the values our company is founded on.  <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X44",
-                  name: "Commitment",
+                  name: "Eagle",
+                  layouts: [
+                    { layout: "L", value: "35237_EAGLE1" },
+                    { layout: "P", value: "71159_EAGLE1" },
+                  ],
                   default: false,
                 },
                 {
-                  description:
-                    "<p>Presented To</p><p>LINE 1 TEXT HERE</p><p>in recognition of the milestones youve achieved and the accomplishments youve earned. Thank you for giving your time with loyalty and dedication. <br><p>LINE 2 TEXT HERE</p><p>LINE 3 TEXT HERE</p>",
-                  no_color: false,
-                  value: "76517_X21",
-                  name: "Dedicated Service",
+                  name: "Winning Team",
+                  layouts: [
+                    { layout: "L", value: "35237_WINTEAM" },
+                    { layout: "P", value: "71159_WINTEAM" },
+                  ],
                   default: false,
+                },
+                {
+                  name: "You Make the Difference",
+                  layouts: [
+                    { layout: "L", value: "35237_YMTD" },
+                    { layout: "P", value: "71159_YMTD" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "No Graphic",
+                  layouts: [
+                    { layout: "P", value: "NOGRAPHIC" },
+                    { layout: "L", value: "NOGRAPHIC" },
+                  ],
+                  default: true,
                 },
               ],
             },
@@ -189,51 +238,78 @@ export default {
           },
         },
       ],
-      template_color: "939393",
+      template_color: "DCBB78",
       show_clipart_button: false,
       images: [
         {
-          template: false,
-          value: "BV_73545_FRONT",
           name: "FRONT",
+          layouts: [
+            { layout: "L", value: "BV_35237BKL_FRONT" },
+            { layout: "P", value: "BV_35237BK_FRONT" },
+          ],
           default: true,
+          template: false,
         },
         {
-          template: true,
-          value: "BV_73545_TEMPL",
-          name: "TEMPLATE_LOGO",
+          name: "TEMPLATE",
+          layouts: [
+            { layout: "L", value: "BV_35237LG_TEMP" },
+            { layout: "P", value: "BV_35237PG_TEMP" },
+          ],
           default: false,
+          template: true,
         },
       ],
-      scene7_id: null,
-      add_another: [],
+      layouts: [
+        { value: "L", name: "Landscape", default: true },
+        { value: "P", name: "Portrait", default: false },
+      ],
       customization_options: "Personalization Options",
       customization_message:
         "Personalize your gift by adding a specially curated Baudville graphic sentiment, your company logo, and/or your own personal message.",
       lets_get_started: "Lets Get Started!",
-      full_customization: [],
-      message_options: [],
-      title_graphic_categories: [],
-      title_graphics: [],
-      approval: [],
-
-      sign_off: [],
       colors: [],
       due_date: [],
       text: [],
     });
 
-    const step = ref(0);
+    const step = ref(1);
     const url = ref(image.value);
 
     const dynamicImage = (line) => {
-      let src = `https://s7d7.scene7.com/is/image/Baudville/${personalization.value.images[1].value}?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${line.line2}&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${line.line4}&$line5=${line.line5}&$line6=${line.line6}&$linelp=&layer=0&src=is{Baudville/${personalization.value.images[0].value}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}`;
+      const imageTemplate = {
+        FRONT: activeLayout.value
+          ? filter(personalization.value.images[0].layouts, [
+              "layout",
+              activeLayout.value,
+            ])[0]?.value
+          : personalization.value.images[0].value,
+        TEMPLATE: activeLayout.value
+          ? filter(personalization.value.images[1].layouts, [
+              "layout",
+              activeLayout.value,
+            ])[0]?.value
+          : personalization.value.images[1].value,
+      };
+      console.log(imageTemplate);
+      let src = `https://s7d7.scene7.com/is/image/Baudville/${imageTemplate.TEMPLATE}?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${line.line2}&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${line.line4}&$line5=${line.line5}&$line6=${line.line6}&$linelp=`;
+
+      // if (true) {
+      //   src += `$verse_fs=72&$verse_text=in+acknowledgement+of+your+exceptional+accomplishments+and+outstanding+performance.+Your+achievements+are+noteworthy+and+have+inspired+us+all.`;
+      // }
+
+      src += `&layer=0&src=is{Baudville/${imageTemplate.FRONT}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}`;
 
       if (artwork.value?.image_path) {
         src += `&layer=3&src=is{${artwork.value?.image_path}}`;
       }
 
       src += `&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
+
+      console.log(emblem.value);
+      if (emblem.value) {
+        src += `&layer=5&src=is{Baudville/${emblem.value}}&op_colorize=${personalization.value.template_color}`;
+      }
 
       loading.value = false;
       return src;
@@ -287,9 +363,10 @@ export default {
       } else {
         // alert("Product is not available");
       }
-      console.log("addCart");
     };
-    watch([scene7Id, items.value, artwork], () => {
+    const watcher = [scene7Id, emblem, items.value, artwork, activeLayout];
+
+    watch(watcher, () => {
       loading.value = true;
       const key = store.getters.getActiveIndex;
       url.value = dynamicImage(store.getters.getItemById(key));
@@ -307,8 +384,30 @@ export default {
     const options = pickBy(this.personalization.steps, {
       category: "Message Options",
     });
-    // this.scene7Id = options[0].options[0].settings[0].value;
-    store.dispatch("saveScene7Id", options[0].options[0].settings[0].value);
+    if (this.personalization.layouts) {
+      const layout = pickBy(this.personalization.layouts, {
+        default: true,
+      });
+      store.dispatch("saveLayout", layout[0].value);
+      store.dispatch(
+        "saveEmblem",
+        options[0].options[1].settings
+          .filter((s) => s.default)
+          .map((s) => s.layouts)
+          .flat()
+          .filter((s) => s.layout === layout[0].value)[0].value
+      );
+      store.dispatch(
+        "saveScene7Id",
+        options[0].options[0].settings
+          .filter((s) => s.default)
+          .map((s) => s.layouts)
+          .flat()
+          .filter((s) => s.layout === layout[0].value)[0].value
+      );
+    } else {
+      store.dispatch("saveScene7Id", options[0].options[0].settings[0].value);
+    }
   },
 };
 </script>

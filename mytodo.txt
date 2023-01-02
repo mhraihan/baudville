@@ -34,3 +34,10 @@ teal: {
         100: "#f0f8fb",
 
         }
+
+
+// back templates
+ value: "BV_73545_TEMPL", image and text
+  value: "BV_73545_TEMP", only text
+
+// message optiobs default value save

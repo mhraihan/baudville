@@ -3,6 +3,7 @@
  */
 const state = {
   scene7Id: null,
+  emblem: null,
   items: [
     {
       line1: "",
@@ -18,6 +19,7 @@ const state = {
   signOff: null,
   signOffError: false,
   artwork: {},
+  layout: null,
 };
 
 /**
@@ -27,6 +29,9 @@ const getters = {
   getScene7Id(state) {
     return state.scene7Id;
   },
+  getEmblem(state) {
+    return state.emblem;
+  },
   getArtwork(state) {
     return state.artwork;
   },
@@ -35,6 +40,9 @@ const getters = {
   },
   getItems(state) {
     return state.items;
+  },
+  getLayout(state) {
+    return state.layout;
   },
   getItemSize(state) {
     return state.items.length - 1;
@@ -65,8 +73,14 @@ const mutations = {
   SAVE_SCENE7_ID(state, id) {
     state.scene7Id = id;
   },
+  SAVE_EMBLEM(state, id) {
+    state.emblem = id;
+  },
   SAVE_ARTWORK(state, artwork) {
     state.artwork = artwork;
+  },
+  SAVE_LAYOUT(state, layout) {
+    state.layout = layout;
   },
   UPDATE_ACTIVE_INDEX(state, index) {
     state.activeIndex = index;
@@ -98,8 +112,14 @@ const actions = {
   saveScene7Id({ commit }, id) {
     commit("SAVE_SCENE7_ID", id);
   },
+  saveEmblem({ commit }, id) {
+    commit("SAVE_EMBLEM", id);
+  },
   saveArtwork({ commit }, artwork) {
     commit("SAVE_ARTWORK", artwork);
+  },
+  saveLayout({ commit }, layout) {
+    commit("SAVE_LAYOUT", layout);
   },
   updateActiveIndex({ commit }, index) {
     commit("UPDATE_ACTIVE_INDEX", index);
