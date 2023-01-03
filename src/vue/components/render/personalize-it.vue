@@ -414,7 +414,7 @@ export default {
       store.dispatch("saveTemplateColor", this.personalization.template_color);
     }
 
-    if (colors.colors?.length) {
+    if (colors?.colors?.length) {
       store.dispatch("saveTemplateColor", colors.colors[0].hex_value);
     }
 
