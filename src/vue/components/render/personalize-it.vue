@@ -83,133 +83,410 @@ export default {
     const personalization = ref({
       steps: [
         {
-          name: "Choose Logo Imprint Color",
-          category: "Color",
-          colors: [
+          name: "Message Options",
+          type: "select",
+          category: "Message Options",
+          options: [
             {
-              name: "White",
-              value: "White",
-              hex_value: "FFFFFF",
+              id: 1,
+              label: "Choose Your Sentiment",
+              category: "sentiment",
+              settings: [
+                {
+                  name: "Above and Beyond - Formal",
+                  layouts: [
+                    { layout: "L", value: "35237_SCRIPT_AB" },
+                    { layout: "P", value: "71159_SCRIPT_AB" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Above and Beyond - Fun",
+                  layouts: [
+                    { layout: "L", value: "35237_CARTWHEEL_AB" },
+                    { layout: "P", value: "71159_CARTWHEEL_AB" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Above and Beyond - Informal",
+                  layouts: [
+                    { layout: "L", value: "35237_BLAZE_AB" },
+                    { layout: "P", value: "71159_BLAZE_AB" },
+                  ],
+                  default: true,
+                },
+                {
+                  name: "Achievement - Classic",
+                  layouts: [
+                    { layout: "L", value: "35237_BANNER_ACHIEV" },
+                    { layout: "P", value: "71159_BANNER_ACHIEV" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Achievement - Formal",
+                  layouts: [
+                    { layout: "L", value: "35237_SCRIPT_ACHIEVE" },
+                    { layout: "P", value: "71159_SCRIPT_ACHIEVE" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Achievement - Informal",
+                  layouts: [
+                    { layout: "L", value: "35237_BLAZE_ACHIEV" },
+                    { layout: "P", value: "71159_BLAZE_ACHIEV" },
+                  ],
+                  default: false,
+                },
+              ],
             },
             {
-              name: "Black",
-              value: "Black",
-              hex_value: "000000",
-            },
-            {
-              name: "Blue",
-              value: "Blue",
-              hex_value: "0047BA",
-            },
-            {
-              name: "Bordeaux",
-              value: "Bordeaux",
-              hex_value: "84344E",
-            },
-            {
-              name: "Brilliant Green",
-              value: "Brilliant Green",
-              hex_value: "00B398",
-            },
-            {
-              name: "Brown",
-              value: "Brown",
-              hex_value: "6B3F22",
-            },
-            {
-              name: "Dark Blue",
-              value: "Dark Blue",
-              hex_value: "001E62",
-            },
-            {
-              name: "Dark Purple",
-              value: "Dark Purple",
-              hex_value: "5C068C",
-            },
-            {
-              name: "Dark Red",
-              value: "Dark Red",
-              hex_value: "C2002F",
-            },
-            {
-              name: "Dark Yellow",
-              value: "Dark Yellow",
-              hex_value: "FFB718",
-            },
-            {
-              name: "Forest Green",
-              value: "Forest Green",
-              hex_value: "006547",
-            },
-            {
-              name: "Light Green",
-              value: "Light Green",
-              hex_value: "00953A",
-            },
-            {
-              name: "Light Red",
-              value: "Light Red",
-              hex_value: "E2231A",
-            },
-            {
-              name: "Light Yellow",
-              value: "Light Yellow",
-              hex_value: "F8E946",
-            },
-            {
-              name: "Marine Blue",
-              value: "Marine Blue",
-              hex_value: "0055B7",
-            },
-            {
-              name: "Medium Blue",
-              value: "Medium Blue",
-              hex_value: "002F6C",
-            },
-            {
-              name: "Medium Red",
-              value: "Medium Red",
-              hex_value: "CF0A2C",
-            },
-            {
-              name: "Medium Yellow",
-              value: "Medium Yellow",
-              hex_value: "FFCD00",
-            },
-            {
-              name: "Metallic Gold",
-              value: "Metallic Gold",
-              hex_value: "86754F",
-            },
-            {
-              name: "Mustard Yellow",
-              value: "Mustard Yellow",
-              hex_value: "F1B434",
-            },
-            {
-              name: "Orange",
-              value: "Orange",
-              hex_value: "FF661B",
-            },
-            {
-              name: "Pink",
-              value: "Pink",
-              hex_value: "E45DBF",
-            },
-            {
-              name: "Silver",
-              value: "Silver",
-              hex_value: "8B8C8D",
-            },
-            {
-              name: "Turquoise",
-              value: "Turquoise",
-              hex_value: "00ABC7",
+              id: 2,
+              label: "Choose An Emblem",
+              category: "emblem",
+              settings: [
+                {
+                  name: "Apple Star",
+                  layouts: [
+                    { layout: "L", value: "35237_APPLESTAR" },
+                    { layout: "P", value: "71159_APPLESTAR" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Cadusceus",
+                  layouts: [
+                    { layout: "L", value: "35237_CADUSCEUS" },
+                    { layout: "P", value: "71159_CADUSCEUS" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Cross",
+                  layouts: [
+                    { layout: "L", value: "35237_CROSS" },
+                    { layout: "P", value: "71159_CROSS" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Eagle",
+                  layouts: [
+                    { layout: "L", value: "35237_EAGLE1" },
+                    { layout: "P", value: "71159_EAGLE1" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "Winning Team",
+                  layouts: [
+                    { layout: "L", value: "35237_WINTEAM" },
+                    { layout: "P", value: "71159_WINTEAM" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "You Make the Difference",
+                  layouts: [
+                    { layout: "L", value: "35237_YMTD" },
+                    { layout: "P", value: "71159_YMTD" },
+                  ],
+                  default: false,
+                },
+                {
+                  name: "No Graphic",
+                  layouts: [
+                    { layout: "P", value: "NOGRAPHIC" },
+                    { layout: "L", value: "NOGRAPHIC" },
+                  ],
+                  default: true,
+                },
+              ],
             },
           ],
         },
         {
-          name: "Add Logo",
+          name: "Personalization",
+          category: "Personalization",
+          show_price: false,
+          lines: [
+            {
+              active_only_if_no_graphic: false,
+              default: "Awarded To",
+              placeholder: "",
+              layouts: {
+                L: {
+                  character_limit: 65,
+                  font_size: 80,
+                },
+                P: { character_limit: 50, font_size: 80 },
+              },
+            },
+            {
+              default: "",
+              placeholder: "Recipient's name",
+              layouts: {
+                L: {
+                  character_limit: 40,
+                  font_size: 128,
+                },
+                P: { character_limit: 30, font_size: 128 },
+              },
+
+              active_only_if_no_graphic: false,
+            },
+          ],
+          fonts: [
+            {
+              value: "Times New Roman",
+              name: "Times New Roman (more formal)",
+              default: true,
+            },
+            {
+              value: "Myriad Pro",
+              name: "Myriad (less formal)",
+              default: false,
+            },
+          ],
+          verses: [
+            {
+              name: "Customer Service 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for outstanding service and dedication. \r\nThank you for continuing our tradition of excellence. \r\nYou are our shining star!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for outstanding service and dedication. \r\nThank you for continuing our tradition \r\nof excellence. You are our shining star!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Customer Service 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for exemplary service in all aspects of the customer experience. \r\nYour knowledge and dependability set you apart from the rest. \r\nYou Make the Difference!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for exemplary service in all aspects \r\nof the customer experience. Your knowledge \r\nand dependability set you apart from the rest. \r\nYou Make the Difference!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in grateful appreciation and distinguished \r\nrecognition of your hard work, devotion\r\nand commitment to excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in grateful appreciation and \r\ndistinguished recognition of \r\nyour hard work, devotion and \r\ncommitment to excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for reaching the pinnacle of success, \r\nmaking yourself a true shining example \r\nof the principles for which we stand.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for reaching the pinnacle of success, \r\nmaking yourself a true shining example \r\nof the principles for which we stand.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for consistently producing at the highest levels, \r\nclearly marking yourself as an achiever of excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for consistently producing at the \r\nhighest levels, clearly marking yourself \r\nas an achiever of excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 4",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for demonstrating excellence \r\nand inspiring others to perform at their best. \r\nWe are a better team because of you!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for demonstrating excellence \r\nand inspiring others to perform at their best.\r\nWe are a better team because of you!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Leadership 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in recognition of your superior leadership.\r\nYou set and reach professional goals,\r\ndirecting the team to ultimate success.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in recognition of your superior leadership.\r\nYou set and reach professional goals, \r\ndirecting the team to ultimate success.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in acknowledgement of your exceptional\r\naccomplishments and outstanding performance. \r\nYour achievements are noteworthy and have inspired us all.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in acknowledgement of your exceptional\r\naccomplishments and outstanding \r\nperformance. Your achievements are\r\nnoteworthy and have inspired us all.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for a truly superior and outstanding achievement. \r\nYour excellent performance has set a new high standard\r\nfor everyone to strive toward. Congratulations from us all!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for a truly superior and outstanding achievement.\r\nYour excellent performance has set a new high\r\nstandard for everyone to strive toward. \r\nCongratulations from us all!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for meeting and exceeding all standards. \r\nWe commend you on your top quality performance \r\nand thank you for always reaching above and beyond.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for meeting and exceeding all standards. \r\nWe commend you on your top quality\r\nperformance and thank you for always \r\nreaching above and beyond.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 4",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for an absolutely outstanding performance. \r\nYour efforts have been diligent, resulting in shining success. \r\nCongratulations on a job well done!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for an absolutely outstanding \r\nperformance. Your efforts have been diligent,\r\nresulting in shining success. \r\nCongratulations on a job well done!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in recognition of your dedication and \r\nloyalty for so many years. \r\nYour allegiance has made a lasting impression \r\nand sets a new standard of excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in recognition of your dedication and \r\nloyalty for so many years. \r\nYour allegiance has made a lasting impression \r\nand sets a new standard of excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for your dedicated years of outstanding service\r\nand commitment. Thank you for everything you have done. \r\nYou truly make a difference.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for your dedicated years of outstanding \r\nservice and commitment. Thank you for everything \r\nyou have done. You truly make a difference.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for your loyal dedication and unwavering\r\ncommitment. Thank you for contributing to our \r\ngoals, helping our organization stand above the rest.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for your loyal dedication and unwavering \r\ncommitment. Thank you for your \r\noutstanding contributions toward our goals, \r\nand for making our organization \r\nstand above the rest.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Custom Verse",
+              layouts: [
+                { layout: "L", value: "" },
+                { layout: "P", value: "" },
+              ],
+              default: true,
+            },
+          ],
+        },
+        {
+          name: "Add Logo or Artwork",
           category: "logo",
           logo: {
             message:
@@ -217,7 +494,7 @@ export default {
           },
         },
         {
-          name: "Finalize Details",
+          name: "Approval",
           category: "approval",
           notes: {
             message:
@@ -225,25 +502,39 @@ export default {
           },
         },
       ],
+      template_color: "DCBB78",
       show_clipart_button: false,
       images: [
         {
           name: "FRONT",
-          value: "BV_50061BK_BACK",
+          layouts: [
+            { layout: "L", value: "BV_35237BKL_FRONT" },
+            { layout: "P", value: "BV_35237BK_FRONT" },
+          ],
           default: true,
           template: false,
         },
         {
           name: "TEMPLATE",
-          value: "BV_50061_TEMP",
+          layouts: [
+            { layout: "L", value: "BV_35237LG_TEMP" },
+            { layout: "P", value: "BV_35237PG_TEMP" },
+          ],
           default: false,
           template: true,
         },
       ],
-      customization_options: "Promotional items that spark brand love!",
+      layouts: [
+        { value: "L", name: "Landscape", default: true },
+        { value: "P", name: "Portrait", default: false },
+      ],
+      scene7Id: true,
+      customization_options: "Personalization Options",
       customization_message:
-        "Create a buzz around your brand with gifts and gear that reflects who you are. Simply choose your imprint color and add your logo for instant brand power!",
+        "Personalize your gift by adding a specially curated Baudville graphic sentiment, your company logo, and/or your own personal message.",
       lets_get_started: "Lets Get Started!",
+      due_date: [],
+      text: [],
     });
 
     const url = ref(image.value);
@@ -263,12 +554,17 @@ export default {
             ])[0]?.value
           : personalization.value.images[1].value,
       };
-      if (artwork.value?.image_path) {
+      if (artwork.value?.image_path && activeLayout.value !== "P") {
+        //layout p does not work
         imageTemplate.TEMPLATE += "L";
       }
-      let src = `https://s7d7.scene7.com/is/image/Baudville/${
-        imageTemplate.TEMPLATE
-      }?$fn=${font.value && font.value}&$line1=${line.line1}&$line1fs=${
+      let src = `https://s7d7.scene7.com/is/image/Baudville/${imageTemplate.TEMPLATE}?`;
+
+      if (font.value) {
+        src += `$fn=${font.value}&$fn=${font.value}`;
+      }
+
+      src += `&$line1=${line.line1}&$line1fs=${
         fontSize.value[0] || 80
       }&$line2=${line.line2}&$line2fs=${fontSize.value[1] || 128}&$line3=${
         line.line3
