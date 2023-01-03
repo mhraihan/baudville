@@ -25,6 +25,7 @@
         :price="option?.show_price || false"
         :verses="option?.verses || {}"
       />
+      <ColorsOptions v-if="option.category === 'Color'" :option="option" />
       <LogoArtwork v-if="option.category === 'logo'" />
       <StepApproval v-if="option.category === 'approval'" />
     </div>
@@ -38,6 +39,7 @@ import MessageOptions from "./message-options.vue";
 import PersonalizationOption from "./personalization-option.vue";
 import LogoArtwork from "./logo-artwork.vue";
 import StepApproval from "./step-approval.vue";
+import ColorsOptions from "./colors-options.vue";
 export default {
   components: {
     StepHeader,
@@ -46,6 +48,7 @@ export default {
     PersonalizationOption,
     LogoArtwork,
     StepApproval,
+    ColorsOptions,
   },
   props: {
     step: Number,

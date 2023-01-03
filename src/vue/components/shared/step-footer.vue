@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute bottom-0 left-0 flex w-full border-t primary-border-color"
+    class="z-50 absolute bottom-0 left-0 flex w-full border-t primary-border-color"
   >
     <button
       class="flex items-center justify-center flex-1 p-4"

@@ -23,6 +23,7 @@ const state = {
   font: "",
   fontSize: [112, 80, 80],
   verse: null,
+  templateColor: null,
 };
 
 /**
@@ -34,6 +35,9 @@ const getters = {
   },
   getEmblem(state) {
     return state.emblem;
+  },
+  getTemplateColor(state) {
+    return state.templateColor;
   },
   getArtwork(state) {
     return state.artwork;
@@ -91,6 +95,9 @@ const mutations = {
   SAVE_ARTWORK(state, artwork) {
     state.artwork = artwork;
   },
+  SAVE_TEMPLATE_COLOR(state, templateColor) {
+    state.templateColor = templateColor;
+  },
   SAVE_LAYOUT(state, layout) {
     state.layout = layout;
   },
@@ -138,6 +145,9 @@ const actions = {
   },
   saveArtwork({ commit }, artwork) {
     commit("SAVE_ARTWORK", artwork);
+  },
+  saveTemplateColor({ commit }, templateColor) {
+    commit("SAVE_TEMPLATE_COLOR", templateColor);
   },
   saveFont({ commit }, font) {
     commit("SAVE_FONT", font);
