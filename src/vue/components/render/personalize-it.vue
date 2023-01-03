@@ -386,6 +386,8 @@ export default {
       "Personalization",
     ])[0];
 
+    const colors = filter(this.personalization.steps, ["category", "Color"])[0];
+
     const fonts = personalization?.fonts;
     if (fonts?.length) {
       store.dispatch("saveFont", filter(fonts, ["default", true])[0]?.value);
@@ -411,6 +413,11 @@ export default {
     if (this.personalization?.template_color) {
       store.dispatch("saveTemplateColor", this.personalization.template_color);
     }
+
+    if (colors.colors?.length) {
+      store.dispatch("saveTemplateColor", colors.colors[0].hex_value);
+    }
+
     if (this.personalization.scene7Id) {
       if (this.personalization.layouts) {
         const layout = pickBy(this.personalization.layouts, {
