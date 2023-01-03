@@ -6,5 +6,6 @@ node_modules/
 shopify/assets/*
 !shopify/assets/*static*
 fully_composited_image.ini
-json/Vibrant Luminary Crystal Trophy Collection - Tear Drop .json
+json/
 mytodo.txt
+
