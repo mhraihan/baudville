@@ -20,6 +20,9 @@ const state = {
   signOffError: false,
   artwork: {},
   layout: null,
+  font: "",
+  fontSize: [112, 80, 80],
+  verse: null,
 };
 
 /**
@@ -34,6 +37,15 @@ const getters = {
   },
   getArtwork(state) {
     return state.artwork;
+  },
+  getFont(state) {
+    return state.font;
+  },
+  getFontSize(state) {
+    return state.fontSize;
+  },
+  getVerse(state) {
+    return state.verse;
   },
   getActiveIndex(state) {
     return state.activeIndex;
@@ -82,6 +94,15 @@ const mutations = {
   SAVE_LAYOUT(state, layout) {
     state.layout = layout;
   },
+  SAVE_FONT(state, font) {
+    state.font = font;
+  },
+  SAVE_FONT_SIZE(state, fontSize) {
+    state.fontSize = fontSize;
+  },
+  SAVE_VERSE(state, verse) {
+    state.verse = verse;
+  },
   UPDATE_ACTIVE_INDEX(state, index) {
     state.activeIndex = index;
   },
@@ -118,8 +139,17 @@ const actions = {
   saveArtwork({ commit }, artwork) {
     commit("SAVE_ARTWORK", artwork);
   },
+  saveFont({ commit }, font) {
+    commit("SAVE_FONT", font);
+  },
+  saveFontSize({ commit }, fontSize) {
+    commit("SAVE_FONT_SIZE", fontSize);
+  },
   saveLayout({ commit }, layout) {
     commit("SAVE_LAYOUT", layout);
+  },
+  saveVerse({ commit }, verse) {
+    commit("SAVE_VERSE", verse);
   },
   updateActiveIndex({ commit }, index) {
     commit("UPDATE_ACTIVE_INDEX", index);

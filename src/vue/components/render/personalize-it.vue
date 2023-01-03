@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { pickBy, filter } from "lodash";
+import { pickBy, filter, each } from "lodash";
 import { useStore } from "vuex";
 import { ref, computed, toRefs, watch } from "vue";
 import StepButton from "../shared/step-button.vue";
@@ -71,8 +71,13 @@ export default {
     const scene7Id = computed(() => store.getters.getScene7Id);
     const emblem = computed(() => store.getters.getEmblem);
     const artwork = computed(() => store.getters.getArtwork);
+    const font = computed(() => store.getters.getFont);
+    const fontSize = computed(() => store.getters.getFontSize);
     const items = computed(() => store.getters.getItems);
     const activeLayout = computed(() => store.getters.getLayout);
+    const verseText = computed(() => store.getters.getVerse);
+    const step = ref(0);
+
     const personalization = ref({
       steps: [
         {
@@ -203,21 +208,278 @@ export default {
         {
           name: "Personalization",
           category: "Personalization",
+          show_price: false,
           lines: [
             {
-              character_limit: 26,
-              font_size: 112,
               active_only_if_no_graphic: false,
+              default: "Awarded To",
+              placeholder: "",
+              layouts: {
+                L: {
+                  character_limit: 65,
+                  font_size: 80,
+                },
+                P: { character_limit: 50, font_size: 80 },
+              },
             },
             {
-              character_limit: 26,
-              font_size: 80,
+              default: "",
+              placeholder: "Recipient's name",
+              layouts: {
+                L: {
+                  character_limit: 40,
+                  font_size: 128,
+                },
+                P: { character_limit: 30, font_size: 128 },
+              },
+
               active_only_if_no_graphic: false,
             },
+          ],
+          fonts: [
             {
-              character_limit: 26,
-              font_size: 80,
-              active_only_if_no_graphic: false,
+              value: "Times New Roman",
+              name: "Times New Roman (more formal)",
+              default: true,
+            },
+            {
+              value: "Myriad Pro",
+              name: "Myriad (less formal)",
+              default: false,
+            },
+          ],
+          verses: [
+            {
+              name: "Customer Service 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for outstanding service and dedication. \r\nThank you for continuing our tradition of excellence. \r\nYou are our shining star!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for outstanding service and dedication. \r\nThank you for continuing our tradition \r\nof excellence. You are our shining star!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Customer Service 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for exemplary service in all aspects of the customer experience. \r\nYour knowledge and dependability set you apart from the rest. \r\nYou Make the Difference!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for exemplary service in all aspects \r\nof the customer experience. Your knowledge \r\nand dependability set you apart from the rest. \r\nYou Make the Difference!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in grateful appreciation and distinguished \r\nrecognition of your hard work, devotion\r\nand commitment to excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in grateful appreciation and \r\ndistinguished recognition of \r\nyour hard work, devotion and \r\ncommitment to excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for reaching the pinnacle of success, \r\nmaking yourself a true shining example \r\nof the principles for which we stand.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for reaching the pinnacle of success, \r\nmaking yourself a true shining example \r\nof the principles for which we stand.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for consistently producing at the highest levels, \r\nclearly marking yourself as an achiever of excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for consistently producing at the \r\nhighest levels, clearly marking yourself \r\nas an achiever of excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Excellence 4",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for demonstrating excellence \r\nand inspiring others to perform at their best. \r\nWe are a better team because of you!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for demonstrating excellence \r\nand inspiring others to perform at their best.\r\nWe are a better team because of you!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Leadership 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in recognition of your superior leadership.\r\nYou set and reach professional goals,\r\ndirecting the team to ultimate success.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in recognition of your superior leadership.\r\nYou set and reach professional goals, \r\ndirecting the team to ultimate success.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in acknowledgement of your exceptional\r\naccomplishments and outstanding performance. \r\nYour achievements are noteworthy and have inspired us all.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in acknowledgement of your exceptional\r\naccomplishments and outstanding \r\nperformance. Your achievements are\r\nnoteworthy and have inspired us all.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for a truly superior and outstanding achievement. \r\nYour excellent performance has set a new high standard\r\nfor everyone to strive toward. Congratulations from us all!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for a truly superior and outstanding achievement.\r\nYour excellent performance has set a new high\r\nstandard for everyone to strive toward. \r\nCongratulations from us all!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for meeting and exceeding all standards. \r\nWe commend you on your top quality performance \r\nand thank you for always reaching above and beyond.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for meeting and exceeding all standards. \r\nWe commend you on your top quality\r\nperformance and thank you for always \r\nreaching above and beyond.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Performance 4",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for an absolutely outstanding performance. \r\nYour efforts have been diligent, resulting in shining success. \r\nCongratulations on a job well done!",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for an absolutely outstanding \r\nperformance. Your efforts have been diligent,\r\nresulting in shining success. \r\nCongratulations on a job well done!",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 1",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "in recognition of your dedication and \r\nloyalty for so many years. \r\nYour allegiance has made a lasting impression \r\nand sets a new standard of excellence.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "in recognition of your dedication and \r\nloyalty for so many years. \r\nYour allegiance has made a lasting impression \r\nand sets a new standard of excellence.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 2",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for your dedicated years of outstanding service\r\nand commitment. Thank you for everything you have done. \r\nYou truly make a difference.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for your dedicated years of outstanding \r\nservice and commitment. Thank you for everything \r\nyou have done. You truly make a difference.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Years of Service 3",
+              layouts: [
+                {
+                  layout: "L",
+                  value:
+                    "for your loyal dedication and unwavering\r\ncommitment. Thank you for contributing to our \r\ngoals, helping our organization stand above the rest.",
+                },
+                {
+                  layout: "P",
+                  value:
+                    "for your loyal dedication and unwavering \r\ncommitment. Thank you for your \r\noutstanding contributions toward our goals, \r\nand for making our organization \r\nstand above the rest.",
+                },
+              ],
+              default: false,
+            },
+            {
+              name: "Custom Verse",
+              layouts: [
+                { layout: "L", value: "" },
+                { layout: "P", value: "" },
+              ],
+              default: true,
             },
           ],
         },
@@ -273,7 +535,6 @@ export default {
       text: [],
     });
 
-    const step = ref(1);
     const url = ref(image.value);
 
     const dynamicImage = (line) => {
@@ -291,22 +552,33 @@ export default {
             ])[0]?.value
           : personalization.value.images[1].value,
       };
-      console.log(imageTemplate);
-      let src = `https://s7d7.scene7.com/is/image/Baudville/${imageTemplate.TEMPLATE}?$fn=&$line1=${line.line1}&$line1fs=112&$line2=${line.line2}&$line2fs=80&$line3=${line.line3}&$line3fs=80&$line4=${line.line4}&$line5=${line.line5}&$line6=${line.line6}&$linelp=`;
 
-      // if (true) {
-      //   src += `$verse_fs=72&$verse_text=in+acknowledgement+of+your+exceptional+accomplishments+and+outstanding+performance.+Your+achievements+are+noteworthy+and+have+inspired+us+all.`;
-      // }
+      let src = `https://s7d7.scene7.com/is/image/Baudville/${
+        imageTemplate.TEMPLATE
+      }?$fn=${font.value && font.value}&$line1=${line.line1}&$line1fs=${
+        fontSize.value[0] || 80
+      }&$line2=${line.line2}&$line2fs=${fontSize.value[1] || 128}&$line3=${
+        line.line3
+      }&$line3fs=${fontSize.value[2] || 80}&$line4=${line.line4}&$line5=${
+        line.line5
+      }&$line6=${line.line6}&$linelp=`;
+
+      if (verseText.value) {
+        src += `&$verse_fs=72&$verse_text=${encodeURI(
+          verseText.value
+        ).replaceAll("%0D%0A", "%0D\\par%0A")}`; // new line does not work, need to replace
+      }
 
       src += `&layer=0&src=is{Baudville/${imageTemplate.FRONT}}&layer=1&hide=0&op_colorize=${personalization.value.template_color}&src=is{Baudville/${scene7Id.value}}&layer=2&op_colorize=${personalization.value.template_color}`;
 
       if (artwork.value?.image_path) {
         src += `&layer=3&src=is{${artwork.value?.image_path}}`;
+      } else {
+        src += `&layer=3`;
       }
 
       src += `&op_colorize=${personalization.value.template_color}&layer=4&op_colorize=${personalization.value.template_color}`;
 
-      console.log(emblem.value);
       if (emblem.value) {
         src += `&layer=5&src=is{Baudville/${emblem.value}}&op_colorize=${personalization.value.template_color}`;
       }
@@ -364,7 +636,15 @@ export default {
         // alert("Product is not available");
       }
     };
-    const watcher = [scene7Id, emblem, items.value, artwork, activeLayout];
+    const watcher = [
+      scene7Id,
+      emblem,
+      items.value,
+      artwork,
+      activeLayout,
+      font,
+      verseText,
+    ];
 
     watch(watcher, () => {
       loading.value = true;
@@ -384,10 +664,38 @@ export default {
     const options = pickBy(this.personalization.steps, {
       category: "Message Options",
     });
+    const personalization = filter(this.personalization.steps, [
+      "category",
+      "Personalization",
+    ])[0];
+
+    const fonts = personalization?.fonts;
+    if (fonts?.length) {
+      store.dispatch("saveFont", filter(fonts, ["default", true])[0]?.value);
+    }
+    const lines = personalization?.lines;
+    if (lines?.length) {
+      const items = {};
+      const font_size = [];
+      each(lines, (line, index) => {
+        items[`line${index + 1}`] = line.default;
+        font_size.push(
+          line?.font_size || Object.values(line.layouts)[0]?.font_size
+        );
+      });
+
+      store.dispatch("saveFontSize", font_size);
+      store.dispatch("updateItem", {
+        item: items,
+        index: 0,
+      });
+    }
+
     if (this.personalization.layouts) {
       const layout = pickBy(this.personalization.layouts, {
         default: true,
       });
+
       store.dispatch("saveLayout", layout[0].value);
       store.dispatch(
         "saveEmblem",

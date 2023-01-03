@@ -21,6 +21,9 @@
       <PersonalizationOption
         v-if="option.category === 'Personalization'"
         :lines="option.lines"
+        :fonts="option?.fonts || {}"
+        :price="option?.show_price || false"
+        :verses="option?.verses || {}"
       />
       <LogoArtwork v-if="option.category === 'logo'" />
       <StepApproval v-if="option.category === 'approval'" />

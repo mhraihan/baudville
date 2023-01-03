@@ -41,3 +41,7 @@ teal: {
   value: "BV_73545_TEMP", only text
 
 // message optiobs default value save
+
+// find the font size (done)
+
+// Enter A Custom Verse (need to study escape characters)

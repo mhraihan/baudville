@@ -20,6 +20,7 @@
 
 <script>
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   props: {
@@ -29,11 +30,20 @@ export default {
     line: Object,
   },
   setup(props, { emit }) {
-    const count = ref(props.line.character_limit);
+    const store = useStore();
+    const limit =
+      props.line?.layouts[store.getters.getLayout]?.character_limit ||
+      props.line.character_limit;
+    const count = ref(limit);
+
+    count.value = limit - props.modelValue.length;
+    // check overflow when layout changes
     const change = (e) => {
       const text = e.target.value;
-      count.value = props.line.character_limit - text.length;
-      emit("update:modelValue", text);
+      count.value = limit - text.length;
+      if (count.value) {
+        emit("update:modelValue", text);
+      }
     };
 
     return {

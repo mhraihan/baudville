@@ -3,7 +3,7 @@
     <div class="px-0 pt-2 pb-4 mb-4 border-b border-teal-200">
       <div>Personalization is free for this item</div>
     </div>
-    <div class="pb-12">
+    <div class="pb-4">
       <div class="">
         <div class="flex items-center mb-4">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
@@ -19,6 +19,7 @@
             ><span class="">No Personalization</span></label
           >
         </div>
+
         <div class="flex items-center mb-4">
           <div class="inline-flex items-center pr-1 mr-2 value value--vue">
             <input
@@ -34,10 +35,37 @@
           >
         </div>
       </div>
+      <div v-if="Object.keys(fonts).length">
+        <div class="my-6">
+          <p class="mb-2">
+            <label for="choose-fonts" class="text-sm font-bold"
+              >Choose A Font</label
+            >
+          </p>
+          <div class="w-full">
+            <select
+              id="choose-fonts"
+              class="w-full h-12 px-4 py-2 border-gray-200 focus:ring-0 focus:outline-none"
+              @change="changeFont($event)"
+            >
+              <option
+                :selected="font.default"
+                v-for="(font, key) in fonts"
+                :key="key"
+                :value="JSON.stringify(font)"
+                v-text="font.name"
+              />
+            </select>
+          </div>
+        </div>
+      </div>
       <div v-if="personalization" class="">
-        <PriceTable />
-        <p @click="add" class="flex justify-end">
-          <button class="tracking-wide button button-product font-bn !text-xl">
+        <PriceTable v-if="price" />
+        <p class="flex justify-end">
+          <button
+            @click="add"
+            class="tracking-wide button button-product font-bn !text-xl"
+          >
             + Add Another
           </button>
         </p>
@@ -104,10 +132,49 @@
           </div>
         </div>
       </div>
+      <div v-if="Object.keys(verses).length">
+        <div class="mt-8">
+          <div class="w-full">
+            <select
+              id="choose-verses"
+              class="w-full h-12 px-4 py-2 border-gray-200 focus:ring-0 focus:outline-none"
+              @change="changeVerse($event)"
+            >
+              <option
+                :selected="verse.default"
+                v-for="(verse, key) in verses"
+                :key="key"
+                :value="JSON.stringify(verse)"
+                v-text="verse.name"
+              />
+            </select>
+            <p class="my-2">
+              <label for="choose-verses" class="text-sm font-bold"
+                >Enter A Custom Verse</label
+              >
+            </p>
+          </div>
+          <div class="block">
+            <textarea
+              @keyup="updateVerse($event)"
+              maxlength="750"
+              id="verse"
+              name="verse"
+              class="w-full h-44 border border-gray-400 px-1 py-3 rounded focus:outline-none focus:border-gray-100 focus:transition text-center"
+              v-model="verseText"
+            ></textarea>
+            <div class="value__note">
+              Write your custom greeting here. 750 characters max.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </DivContainer>
 </template>
 <script>
+import { filter } from "lodash";
+
 import { ref, computed, watch } from "vue";
 import DivContainer from "./div-container.vue";
 import PriceTable from "./price-table.vue";
@@ -120,10 +187,15 @@ export default {
       type: Object,
       required: true,
     },
+    verses: Object,
+    fonts: Object,
+    price: Boolean,
   },
   setup() {
     const store = useStore();
     const personalization = ref(true);
+    const activeLayout = computed(() => store.getters.getLayout);
+    const verseText = computed(() => store.getters.getVerse);
     const item = ref({});
     const items = computed(() => store.getters.getItems);
     const index = ref(0);
@@ -159,6 +231,20 @@ export default {
 
       edit(idx);
     };
+    const changeFont = (event) => {
+      const font = JSON.parse(event.target.value);
+      store.dispatch("saveFont", font.value);
+    };
+    const changeVerse = (event) => {
+      const verse = JSON.parse(event.target.value);
+      const text = filter(verse?.layouts, ["layout", activeLayout.value]);
+      store.dispatch("saveVerse", text[0]?.value || verse?.value);
+    };
+    const updateVerse = (event) => {
+      console.log("updated");
+      store.dispatch("saveVerse", event.target.value);
+    };
+
     watch(item.value, () => {
       store.dispatch("updateItem", {
         item: { ...item.value },
@@ -174,7 +260,22 @@ export default {
       edit,
       remove,
       index,
+      changeFont,
+      changeVerse,
+      verseText,
+      updateVerse,
     };
   },
 };
 </script>
+
+<style scoped>
+select:focus,
+textarea:focus {
+  border-color: #6a747c;
+  box-shadow: 0 0 0 1px #6a747c;
+  outline: none;
+  -webkit-transition: border 0.1s, box-shadow 0.1s;
+  transition: border 0.1s, box-shadow 0.1s;
+}
+</style>
