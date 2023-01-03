@@ -31,6 +31,7 @@
           :key="index"
           :index="index + 1"
           :step="step"
+          :totalSteps="personalization.steps.length"
           :option="option"
           :url="url"
           @addCart="addCart"

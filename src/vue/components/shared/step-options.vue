@@ -9,6 +9,7 @@
       <StepFooter
         class="bg-white"
         :step="step"
+        :totalSteps="totalSteps"
         @next="$emit('next')"
         @back="$emit('back')"
         @addCart="$emit('add-cart')"
@@ -52,6 +53,10 @@ export default {
   },
   props: {
     step: Number,
+    totalSteps: {
+      type: Number,
+      required: true,
+    },
     index: Number,
     option: Object,
   },

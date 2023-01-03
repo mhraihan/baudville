@@ -22,7 +22,7 @@
       </svg>
     </button>
     <button
-      v-if="step === 4"
+      v-if="step === totalSteps"
       class="flex items-center justify-center flex-1 p-4 text-2xl leading-none uppercase border-l primary-border-color font-bn"
       @click="$emit('add-cart')"
     >
@@ -51,6 +51,10 @@ export default {
   name: "StepFooter",
   props: {
     step: {
+      type: Number,
+      required: true,
+    },
+    totalSteps: {
       type: Number,
       required: true,
     },
