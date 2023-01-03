@@ -40,8 +40,11 @@ teal: {
  value: "BV_73545_TEMPL", image and text
   value: "BV_73545_TEMP", only text
 
-// message optiobs default value save
+1. message optiobs default value save
+-- partial fixed
+-- when layout changes, does not work
+-- IDEA, modify original source
+2. find the font size (done)
 
-// find the font size (done)
-
-// Enter A Custom Verse (need to study escape characters)
+3. Enter A Custom Verse (need to study escape characters)
+-- partial fixed

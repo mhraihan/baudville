@@ -31,12 +31,12 @@ export default {
   },
   setup(props, { emit }) {
     const store = useStore();
-    const limit =
-      props.line?.layouts[store.getters.getLayout]?.character_limit ||
-      props.line.character_limit;
+    const limit = store.getters.getLayout
+      ? props.line?.layouts[store.getters.getLayout]?.character_limit
+      : props.line.character_limit;
     const count = ref(limit);
 
-    count.value = limit - props.modelValue.length;
+    count.value = limit - props.modelValue?.length;
     // check overflow when layout changes
     const change = (e) => {
       const text = e.target.value;

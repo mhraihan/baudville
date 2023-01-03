@@ -77,7 +77,7 @@
             @change="change($event, option.category)"
           >
             <option
-              :selected="setting.default"
+              :selected="defaultSelected(setting, option.category)"
               v-for="(setting, key) in option.settings"
               :key="key"
               :value="JSON.stringify(setting)"
@@ -95,7 +95,7 @@
   </DivContainer>
 </template>
 <script>
-import { filter } from "lodash";
+import { filter, each } from "lodash";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import DivContainer from "./div-container.vue";
@@ -118,6 +118,7 @@ export default {
 
     const activeLayout = computed(() => store.getters.getLayout);
     const scene7Id = ref(computed(() => store.getters.getScene7Id));
+    const emblemId = ref(computed(() => store.getters.getEmblem));
     const text = ref(props?.options[0]?.settings[0]?.description);
     const change = (event, category = "sentiment") => {
       const setting = JSON.parse(event.target.value);
@@ -137,8 +138,46 @@ export default {
       }
     };
     const selectLayout = (value) => {
-      console.log(value);
+      each(props.options, (option) => {
+        if (option.category == "emblem") {
+          const property = filter(option.settings, {
+            layouts: [{ value: emblemId.value }],
+          })[0]?.layouts;
+          store.dispatch(
+            "saveEmblem",
+            filter(property, ["layout", value])[0].value
+          );
+        }
+        if (option.category == "sentiment") {
+          const property = filter(option.settings, {
+            layouts: [{ value: scene7Id.value }],
+          })[0]?.layouts;
+          store.dispatch(
+            "saveScene7Id",
+            filter(property, ["layout", value])[0].value
+          );
+        }
+      });
       store.dispatch("saveLayout", value);
+    };
+    const defaultSelected = (setting, category) => {
+      if (activeLayout.value) {
+        if (category == "emblem") {
+          return (
+            filter(setting.layouts, ["layout", activeLayout.value])[0].value ===
+            emblemId.value
+          );
+        }
+        return (
+          filter(setting.layouts, ["layout", activeLayout.value])[0].value ===
+          scene7Id.value
+        );
+      } else {
+        if (category == "emblem") {
+          return setting.value === emblemId.value;
+        }
+        return setting.value === scene7Id.value;
+      }
     };
     return {
       text,
@@ -146,6 +185,7 @@ export default {
       scene7Id,
       activeLayout,
       selectLayout,
+      defaultSelected,
     };
   },
 };
