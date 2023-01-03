@@ -13,6 +13,7 @@
           :for="'color_' + key"
           class="block pt-0 pb-2 px-1 font-bold text-xs"
           ><input
+            :checked="color.hex_value === templateColor"
             type="radio"
             :id="'color_' + key"
             name="color"
@@ -32,6 +33,7 @@
   </DivContainer>
 </template>
 <script>
+import { computed } from "@vue/reactivity";
 import { useStore } from "vuex";
 import DivContainer from "./div-container.vue";
 
@@ -45,12 +47,14 @@ export default {
   },
   setup() {
     const store = useStore();
+    const templateColor = computed(() => store.getters.getTemplateColor);
 
     const change = (color) => {
       store.dispatch("saveTemplateColor", color);
     };
     return {
       change,
+      templateColor,
     };
   },
 };

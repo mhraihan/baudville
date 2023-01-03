@@ -77,7 +77,7 @@ export default {
     const items = computed(() => store.getters.getItems);
     const activeLayout = computed(() => store.getters.getLayout);
     const verseText = computed(() => store.getters.getVerse);
-    const step = ref(1);
+    const step = ref(0);
 
     const personalization = ref({
       steps: [
@@ -248,7 +248,6 @@ export default {
     const url = ref(image.value);
 
     const dynamicImage = (line) => {
-      console.log(templateColor.value);
       const imageTemplate = {
         FRONT: activeLayout.value
           ? filter(personalization.value.images[0].layouts, [
@@ -263,7 +262,9 @@ export default {
             ])[0]?.value
           : personalization.value.images[1].value,
       };
-
+      if (artwork.value?.image_path) {
+        imageTemplate.TEMPLATE += "L";
+      }
       let src = `https://s7d7.scene7.com/is/image/Baudville/${
         imageTemplate.TEMPLATE
       }?$fn=${font.value && font.value}&$line1=${line.line1}&$line1fs=${
