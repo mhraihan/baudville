@@ -1,4 +1,4 @@
-{% comment %} {% assign current_variant = product.selected_or_first_available_variant %}
+{% assign current_variant = product.selected_or_first_available_variant %}
 {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
 <render-recent-view-product 
   :id="{{ product.id }}"
@@ -12,12 +12,12 @@
 >
 </render-recent-view-product>
 {% schema %}
-  {
-    "name": "Recently view Product",
-    "tag": "section",
-    "class": "recent-view-section",
-    "settings": [
-     
-    ]
-  }
-{% endschema %} {% endcomment %}
+{
+  "name": "Recently view Product",
+  "tag": "section",
+  "class": "recent-view-section",
+  "settings": [
+
+  ]
+}
+{% endschema %} 
