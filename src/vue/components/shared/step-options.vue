@@ -23,12 +23,15 @@
         v-if="option.category === 'Personalization'"
         :lines="option.lines"
         :fonts="option?.fonts || {}"
-        :price="option?.show_price || false"
+        :price="price || false"
         :verses="option?.verses || {}"
       />
       <ColorsOptions v-if="option.category === 'Color'" :option="option" />
       <LogoArtwork v-if="option.category === 'logo'" />
-      <StepApproval v-if="option.category === 'approval'" />
+      <StepApproval
+        v-if="option.category === 'approval'"
+        :price="price || false"
+      />
     </div>
   </Transition>
 </template>
@@ -59,6 +62,7 @@ export default {
     },
     index: Number,
     option: Object,
+    price: Boolean,
   },
 };
 </script>

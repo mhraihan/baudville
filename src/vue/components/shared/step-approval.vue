@@ -16,7 +16,7 @@
       data="instructions"
       class="w-full h-12 px-3 py-1 border border-gray-400 rounded"
     />
-    <PriceTable />
+    <PriceTable v-if="price" />
     <div class="my-4 configurator-text-input" index="2">
       <label for="quantity" class="block mb-2 text-sm font-bold"
         ><span class="property__text">Quantity</span></label
@@ -72,6 +72,9 @@ import PriceTable from "./price-table.vue";
 
 export default {
   components: { DivContainer, PriceTable },
+  props: {
+    price: Boolean,
+  },
   setup() {
     const store = useStore();
     const instructions = ref();

@@ -32,6 +32,7 @@
           :index="index + 1"
           :step="step"
           :totalSteps="personalization.steps.length"
+          :price="personalization?.show_price || false"
           :option="option"
           :url="url"
           @addCart="addCart"
