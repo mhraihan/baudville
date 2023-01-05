@@ -77,8 +77,8 @@ export default {
   },
   setup() {
     const store = useStore();
-    const instructions = computed(() => store.getters.instructions);
-    const signOff = computed(() => store.getters.signOff);
+    const instructions = ref(store.getters.instructions);
+    const signOff = ref(store.getters.signOff);
     const error = computed(() => store.getters.signOffError);
     const qty = ref(store.getters.getItemSize + 1);
     watch([instructions, signOff], () => {
