@@ -112,6 +112,7 @@
             <StepInput
               v-for="(line, index) in lines"
               :key="index"
+              :index="index"
               :id="`line${index + 1}`"
               :labelText="`Line ${index + 1}`"
               :line="line"
@@ -191,7 +192,7 @@ export default {
     fonts: Object,
     price: Boolean,
   },
-  setup() {
+  setup(props) {
     const store = useStore();
     const personalization = ref(true);
     const activeLayout = computed(() => store.getters.getLayout);

@@ -15,40 +15,59 @@
       />
       <p>{{ count }} characters remaining</p>
     </div>
+    <FontSize
+      v-if="line.sizes?.length > 1"
+      :line="line"
+      :index="index"
+      @updateFontSize="updateFontSize"
+    />
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import { useStore } from "vuex";
-
+import FontSize from "./font-szie.vue";
 export default {
+  components: { FontSize },
   props: {
     id: String,
     labelText: String,
     modelValue: String,
     line: Object,
+    index: Number,
   },
   setup(props, { emit }) {
     const store = useStore();
-    const limit = store.getters.getLayout
-      ? props.line?.layouts[store.getters.getLayout]?.character_limit
-      : props.line.character_limit;
-    const count = ref(limit);
-
-    count.value = limit - props.modelValue?.length;
+    const sizeIndex = ref(0);
+    const limit = computed(() =>
+      store.getters.getLayout
+        ? props.line?.layouts[store.getters.getLayout]?.character_limit
+        : (props.line?.sizes &&
+            props.line?.sizes[sizeIndex.value]?.character_limit) ||
+          props.line.character_limit
+    );
+    const count = ref(limit.value);
     // check overflow when layout changes
-    const change = (e) => {
-      const text = e.target.value;
-      count.value = limit - text.length;
-      if (count.value) {
-        emit("update:modelValue", text);
-      }
+    const updateInput = (text = props.modelValue) => {
+      const textVal = text.slice(0, limit.value);
+      count.value = limit.value - textVal?.length;
+
+      emit("update:modelValue", textVal);
     };
+    const change = (e) => {
+      updateInput(e.target.value);
+    };
+    updateInput();
+    const updateFontSize = (size) => (sizeIndex.value = size.key);
+    watch(sizeIndex, (va) => {
+      updateInput();
+    });
 
     return {
       count,
       change,
+      updateFontSize,
     };
   },
 };

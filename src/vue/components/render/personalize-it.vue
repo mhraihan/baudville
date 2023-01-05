@@ -203,6 +203,7 @@ export default {
       activeLayout,
       font,
       verseText,
+      fontSize,
     ];
 
     watch(watcher, () => {
@@ -244,7 +245,9 @@ export default {
       each(lines, (line, index) => {
         items[`line${index + 1}`] = line?.default || "";
         font_size.push(
-          line?.font_size || Object.values(line.layouts)[0]?.font_size
+          line?.font_size ||
+            Object.values(line?.layouts || {})[0]?.font_size ||
+            line?.sizes[0]?.font_size
         );
       });
 
@@ -291,7 +294,10 @@ export default {
           "default",
           true,
         ])[0];
-        store.dispatch("saveScene7Id", setting.value);
+        store.dispatch(
+          "saveScene7Id",
+          setting?.value || options[0]?.options[0]?.settings[0].value
+        );
       }
     }
   },
