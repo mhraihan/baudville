@@ -114,9 +114,11 @@ export default {
         fontSize.value[0] || 80
       }&$line2=${line.line2}&$line2fs=${fontSize.value[1] || 128}&$line3=${
         line.line3
-      }&$line3fs=${fontSize.value[2] || 80}&$line4=${line.line4}&$line5=${
-        line.line5
-      }&$line6=${line.line6}&$linelp=`;
+      }&$line3fs=${fontSize.value[2] || 80}&$line4=${line.line4}&$line4fs=${
+        fontSize.value[3] || 80
+      }&$line5=${line.line5}&$line5fs=${fontSize.value[4] || 80}&$line6=${
+        line.line6
+      }&$line6fs=${fontSize.value[5] || 80}&$linelp=`;
 
       if (verseText.value) {
         src += `&$verse_fs=72&$verse_text=${encodeURI(
