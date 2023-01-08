@@ -24,6 +24,7 @@ const state = {
   fontSize: [112, 80, 80],
   verse: null,
   templateColor: null,
+  canvases: [],
 };
 
 /**
@@ -70,6 +71,9 @@ const getters = {
     if (state.items.length > 0) {
       return state.items.slice(-1).pop();
     }
+  },
+  getCanvases(state) {
+    return state.canvases;
   },
   instructions(state) {
     return state.instructions;
@@ -131,6 +135,9 @@ const mutations = {
   SAVE_SIGN_OFF_ERROR(state, bool) {
     state.signOffError = bool;
   },
+  SAVE_CANVASES(state, canvas) {
+    state.canvases.push(canvas);
+  },
 };
 
 /**
@@ -181,6 +188,9 @@ const actions = {
   },
   saveSignOffEror({ commit }, bool) {
     commit("SAVE_SIGN_OFF_ERROR", bool);
+  },
+  saveCanvases({ commit }, canvas) {
+    commit("SAVE_CANVASES", canvas);
   },
 };
 

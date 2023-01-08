@@ -1,10 +1,11 @@
 <template>
-  <div class="flex w-full mb-4">
-    <label :for="id" class="w-24 py-2 text-sm font-bold">
+  <div class="flex w-full mb-4" :class="type === 'textarea' && 'flex-col'">
+    <label :for="id" class="py-2 mr-4 text-sm font-bold">
       <span class="property__text">{{ labelText }}</span>
     </label>
-    <div class="flex flex-col w-full px-2">
-      <input
+    <div class="flex flex-col flex-1">
+      <component
+        :is="type"
         :value="modelValue"
         @keyup="change($event)"
         :id="id"
@@ -36,6 +37,10 @@ export default {
     modelValue: String,
     line: Object,
     index: Number,
+    type: {
+      type: String,
+      default: "input",
+    },
   },
   setup(props, { emit }) {
     const store = useStore();

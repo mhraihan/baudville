@@ -61,77 +61,7 @@
       </div>
       <div v-if="personalization" class="">
         <PriceTable v-if="price" />
-        <p class="flex justify-end">
-          <button
-            @click="add"
-            class="tracking-wide button button-product font-bn !text-xl"
-          >
-            + Add Another
-          </button>
-        </p>
-        <div
-          :class="items.length < 2 && 'pt-4 mt-4 border-t border-teal-200'"
-          class=""
-        >
-          <div v-for="(item, key) in items" :key="key">
-            <div
-              v-if="key !== index"
-              class="pt-4 mt-4 border-t border-teal-200 flex items-center mb-4"
-            >
-              <h3
-                class="heading heading--6 heading--center flex !text-xl font-bold leading-none flex-col !mb-0"
-              >
-                <span class="text-gray-100">Item {{ key + 1 }}</span>
-                <span @click="edit(key)" class="text-base cursor-pointer"
-                  >(Edit)</span
-                >
-              </h3>
-              <div class="flex flex-col ml-4">
-                <div
-                  class="mb-1"
-                  v-for="(value, index) in Object.values(item)"
-                  :key="index"
-                >
-                  <span v-if="value" class="pr-1 font-medium font-capitalize"
-                    >Line {{ index + 1 }}:</span
-                  >
-                  <span v-if="value" class="font-medium font-capitalize">{{
-                    value
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="" :class="items.length > 1 && 'p-4 bg-white rounded'">
-            <h3
-              v-if="items.length > 1"
-              class="heading heading--6 heading--center flex !text-xl font-bold leading-none flex-col"
-            >
-              <span class="text-gray-100">Item {{ index + 1 }}</span>
-            </h3>
-            <StepInput
-              v-for="(line, index) in lines"
-              :key="index"
-              :index="index"
-              :id="`line${index + 1}`"
-              :labelText="`Line ${index + 1}`"
-              :line="line"
-              v-model="item[`line${index + 1}`]"
-            />
-          </div>
-          <div
-            v-if="items.length > 1"
-            class="configurator-quantity-group__actions mt-4"
-          >
-            <button
-              @click="remove(index)"
-              class="bg-white button button-secondary !font-bold font-mont !border-2 border-gray-100 color-gray-100 hover:bg-gray-100"
-            >
-              - Remove
-            </button>
-            <p class="hidden">This product has a minimum quantity of 1</p>
-          </div>
-        </div>
+        <PersonalizationOptionInput :lines="lines" />
       </div>
       <div v-if="Object.keys(verses).length">
         <div class="mt-8">
@@ -179,10 +109,14 @@ import { filter } from "lodash";
 import { ref, computed, watch } from "vue";
 import DivContainer from "./div-container.vue";
 import PriceTable from "./price-table.vue";
-import StepInput from "./step-input.vue";
 import { useStore } from "vuex";
+import PersonalizationOptionInput from "./personalization-option-input.vue";
 export default {
-  components: { DivContainer, PriceTable, StepInput },
+  components: {
+    DivContainer,
+    PriceTable,
+    PersonalizationOptionInput,
+  },
   props: {
     lines: {
       type: Object,

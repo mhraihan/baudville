@@ -131,6 +131,10 @@
           </div>
         </div>
       </div>
+      <PersonalizationOptionInput
+        label="add another kit"
+        :lines="options[0].settings[0].lines"
+      />
     </div>
   </DivContainer>
 </template>
@@ -139,9 +143,9 @@ import { filter, each } from "lodash";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import DivContainer from "./div-container.vue";
-
+import PersonalizationOptionInput from "./personalization-option-input.vue";
 export default {
-  components: { DivContainer },
+  components: { DivContainer, PersonalizationOptionInput },
 
   props: {
     options: {
