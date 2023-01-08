@@ -79,7 +79,7 @@ export default {
     const items = computed(() => store.getters.getItems);
     const activeLayout = computed(() => store.getters.getLayout);
     const verseText = computed(() => store.getters.getVerse);
-    const step = ref(0);
+    const step = ref(1);
 
     const personalization = ref({});
 
@@ -92,14 +92,17 @@ export default {
               "layout",
               activeLayout.value,
             ])[0]?.value
-          : personalization.value.images[0].value,
+          : filter(personalization.value.images, ["default", true])[0]?.value ||
+            personalization.value.images[0].value,
         TEMPLATE: activeLayout.value
           ? filter(personalization.value.images[1].layouts, [
               "layout",
               activeLayout.value,
             ])[0]?.value
-          : personalization.value.images[1].value,
+          : filter(personalization.value.images, ["template", true])[0]
+              ?.value || personalization.value.images[1].value,
       };
+      // console.log(imageTemplate);
       if (artwork.value?.image_path && activeLayout.value !== "P") {
         //layout p does not work
         imageTemplate.TEMPLATE += "L";
@@ -222,7 +225,213 @@ export default {
     };
   },
   created() {
-    this.personalization = window.personalization;
+    this.personalization = {
+      steps: [
+        {
+          name: "Personalize Gift and Delightly Card",
+          type: "radio",
+          category: "Message Options",
+          options: [
+            {
+              id: 1,
+              label:
+                "Choose your art, then scroll down to add your personalization. Note that if you add an additional kit at this step, the art will be the same for both kits.",
+              category: "card",
+              settings: [
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP570BK_TEMP",
+                  value: "CP570BK_TEMP",
+                  name: "1-4 Lines - Suisse (Font)",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP000D_TEMP",
+                  value: "CP000_TEMP",
+                  name: "CP000 - Custom Art",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP005BK_TEMP",
+                  value: "CP005BK_TEMP",
+                  name: "CP005BK - You Radiate Pure Awesome",
+                  default: true,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP015BK_TEMP",
+                  value: "CP015BK_TEMP",
+                  name: "CP015BK - Making A Difference. It's What I do!",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP016BK_TEMP",
+                  value: "CP016BK_TEMP",
+                  name: "CP016BK - One Team. One Vision. One Goal - Black",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP017BK_TEMP",
+                  value: "CP017BK_TEMP",
+                  name: "CP017BK - You are Truly Appreciated - Black",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP021BK_TEMP",
+                  value: "CP021BK_TEMP",
+                  name: "CP021BK - Epic Team - Black",
+                  default: false,
+                },
+                {
+                  lines: [
+                    {
+                      label: "Journal Personalization",
+                      character_limit: 26,
+                    },
+                    {
+                      label: "Gift Message",
+                      character_limit: 300,
+                    },
+                  ],
+                  no_color: true,
+                  thumbnail: "CP048BK2THUMB_TEMP",
+                  value: "CP048BK2_TEMP",
+                  name: "CP048BK - Welcome To the Team Banner",
+                  default: false,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Add Logo or Artwork",
+          category: "logo",
+          logo: {
+            message: "",
+          },
+        },
+        {
+          name: "Approval",
+          category: "approval",
+          notes: {
+            message:
+              "Enter any special instructions you have for your item(s) in the box below. If you have a due date for your order, please enter it here. Please note: as it is our busy season, we cannot guarantee due dates, but we will always try our best!",
+          },
+        },
+      ],
+      template_color: "000000",
+      show_clipart_button: false,
+      canvases: [
+        {
+          view: null,
+          width: 450,
+          height: 450,
+          position_x: 448,
+          position_y: 420,
+        },
+      ],
+      images: [
+        {
+          template: true,
+          value: "BV_81220_TEMP",
+          name: "TEMPLATE",
+          default: false,
+        },
+        {
+          template: false,
+          value: "BV_81220_BACK",
+          name: "BACK",
+          default: true,
+        },
+      ],
+      scene7Id: true,
+      layouts: null,
+      show_price: true,
+      add_another: [],
+      customization_options: "Personalization Options",
+      customization_message:
+        "Personalize your gift by adding a specially curated Baudville graphic sentiment, your company logo, and/or your own personal message.",
+      lets_get_started: "Lets Get Started!",
+      full_customization: [],
+      due_date: [],
+      text: [],
+    };
+    // this.personalization = window.personalization;
   },
   mounted() {
     const store = useStore();

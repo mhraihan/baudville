@@ -192,7 +192,7 @@ export default {
     fonts: Object,
     price: Boolean,
   },
-  setup(props) {
+  setup() {
     const store = useStore();
     const personalization = ref(true);
     const activeLayout = computed(() => store.getters.getLayout);
@@ -210,7 +210,6 @@ export default {
     };
     const add = () => {
       store.dispatch("saveItems", { ...item.value });
-
       update();
     };
     const edit = (key) => {
@@ -229,7 +228,6 @@ export default {
       const idx = key - 1 >= 0 ? key - 1 : 0;
       store.dispatch("deleteItem", key);
       update();
-
       edit(idx);
     };
     const changeFont = (event) => {
@@ -242,7 +240,6 @@ export default {
       store.dispatch("saveVerse", text[0]?.value || verse?.value);
     };
     const updateVerse = (event) => {
-      console.log("updated");
       store.dispatch("saveVerse", event.target.value);
     };
 

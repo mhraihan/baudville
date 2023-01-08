@@ -61,36 +61,76 @@
         </div>
       </div>
     </div>
-    <div v-for="(option, key) in options" :key="key" class="mb-6">
-      <div class="">
+    <div v-if="type === 'select'">
+      <div v-for="(option, key) in options" :key="key" class="mb-6">
         <div class="">
-          <p class="mb-3">
-            <label for="option-1" class="text-sm font-bold">{{
-              option.label
-            }}</label>
-          </p>
+          <div class="">
+            <p class="mb-3">
+              <label for="option-1" class="text-sm font-bold">{{
+                option.label
+              }}</label>
+            </p>
+          </div>
+          <div class="w-full">
+            <select
+              :id="'option-' + option.id"
+              class="w-full px-4 py-2 border-gray-200 focus:ring-0 focus:outline-none"
+              @change="change($event, option.category)"
+            >
+              <option
+                :selected="defaultSelected(setting, option.category)"
+                v-for="(setting, key) in option.settings"
+                :key="key"
+                :value="JSON.stringify(setting)"
+                v-text="setting.name"
+              />
+            </select>
+          </div>
         </div>
-        <div class="w-full">
-          <select
-            :id="'option-' + option.id"
-            class="w-full px-4 py-2 border-gray-200 focus:ring-0 focus:outline-none"
-            @change="change($event, option.category)"
+        <div
+          v-if="text"
+          class="mt-8 text-sm font-medium leading-6 text-center text-gray-100 font-mont"
+          v-html="text"
+        />
+      </div>
+    </div>
+    <div v-if="type === 'radio'">
+      <div v-for="(option, key) in options" :key="key" class="mb-6">
+        <p class="text-sm font-bold mb-3">{{ option.label }}</p>
+        <div class="w-full grid grid-cols-3">
+          <div
+            v-for="(setting, key) in option.settings"
+            :key="key"
+            class="inline-block mb-4 mx-1 thumbnail-list-item"
           >
-            <option
-              :selected="defaultSelected(setting, option.category)"
-              v-for="(setting, key) in option.settings"
-              :key="key"
-              :value="JSON.stringify(setting)"
-              v-text="setting.name"
+            <input
+              type="radio"
+              :id="setting.value"
+              name="layout"
+              class="thumbnail-list-item__input absolute invisible"
+              :value="setting.value"
+              @change="updateScene7Id(setting.value)"
+              :checked="scene7Id === setting.value"
             />
-          </select>
+            <label
+              :for="setting.value"
+              tabindex="0"
+              class="block p-0 border border-gray-400 rounded cursor-pointer"
+            >
+              <div class="pointer-events-none">
+                <img
+                  :src="`https://s7d7.scene7.com/is/image/Baudville/${setting.thumbnail}?$bv_config_graphic_thumb_wide_2x$`"
+                />
+                <div
+                  class="text-white bg-gray-400 font-semibold p-1 leading-4 text-center"
+                >
+                  {{ setting.name }}
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
-      <div
-        v-if="text"
-        class="mt-8 text-sm font-medium leading-6 text-center text-gray-100 font-mont"
-        v-html="text"
-      />
     </div>
   </DivContainer>
 </template>
@@ -137,6 +177,7 @@ export default {
         );
       }
     };
+    const updateScene7Id = (val) => store.dispatch("saveScene7Id", val);
     const selectLayout = (value) => {
       each(props.options, (option) => {
         if (option.category == "emblem") {
@@ -186,6 +227,7 @@ export default {
       activeLayout,
       selectLayout,
       defaultSelected,
+      updateScene7Id,
     };
   },
 };
