@@ -1,14 +1,14 @@
 <template>
   <DivContainer>
     <div class="mb-6" v-if="activeLayout">
-      <p class="text-sm font-bold mb-4">Choose a Layout</p>
+      <p class="mb-4 text-sm font-bold">Choose a Layout</p>
       <div class="w-full">
-        <div class="inline-block mb-4 mx-1 w-32 thumbnail-list-item">
+        <div class="inline-block w-32 mx-1 mb-4 thumbnail-list-item">
           <input
             type="radio"
             id="layout_0"
             name="layout"
-            class="thumbnail-list-item__input absolute invisible"
+            class="absolute invisible thumbnail-list-item__input"
             key="L"
             value="L"
             v-model="activeLayout"
@@ -24,19 +24,19 @@
                 src="https://s7d7.scene7.com/is/image/Baudville/Landscape?&amp;$bv_config_graphic_thumb_wide_2x$"
               />
               <div
-                class="text-white bg-gray-400 font-semibold p-4 leading-4 text-center"
+                class="p-4 font-semibold leading-4 text-center text-white bg-gray-400"
               >
                 Landscape
               </div>
             </div>
           </label>
         </div>
-        <div class="inline-block mb-4 mr-0 ml-3 w-32 thumbnail-list-item">
+        <div class="inline-block w-32 mb-4 ml-3 mr-0 thumbnail-list-item">
           <input
             type="radio"
             id="layout_1"
             name="layout"
-            class="thumbnail-list-item__input absolute invisible"
+            class="absolute invisible thumbnail-list-item__input"
             key="P"
             value="P"
             v-model="activeLayout"
@@ -52,7 +52,7 @@
                 src="https://s7d7.scene7.com/is/image/Baudville/Portrait?&$bv_config_graphic_thumb_wide_2x$"
               />
               <div
-                class="text-white bg-gray-400 font-semibold p-4 leading-4 text-center"
+                class="p-4 font-semibold leading-4 text-center text-white bg-gray-400"
               >
                 Portrait
               </div>
@@ -96,18 +96,18 @@
     </div>
     <div v-if="type === 'radio'">
       <div v-for="(option, key) in options" :key="key" class="mb-6">
-        <p class="text-sm font-bold mb-3">{{ option.label }}</p>
-        <div class="w-full grid grid-cols-3">
+        <p class="mb-3 text-sm font-bold">{{ option.label }}</p>
+        <div class="grid w-full grid-cols-3">
           <div
             v-for="(setting, key) in option.settings"
             :key="key"
-            class="inline-block mb-4 mx-1 thumbnail-list-item"
+            class="inline-block mx-1 mb-4 thumbnail-list-item"
           >
             <input
               type="radio"
               :id="setting.value"
               name="layout"
-              class="thumbnail-list-item__input absolute invisible"
+              class="absolute invisible thumbnail-list-item__input"
               :value="setting.value"
               @change="updateScene7Id(setting.value)"
               :checked="scene7Id === setting.value"
@@ -122,7 +122,7 @@
                   :src="`https://s7d7.scene7.com/is/image/Baudville/${setting.thumbnail}?$bv_config_graphic_thumb_wide_2x$`"
                 />
                 <div
-                  class="text-white bg-gray-400 font-semibold p-1 leading-4 text-center"
+                  class="p-1 font-semibold leading-4 text-center text-white bg-gray-400"
                 >
                   {{ setting.name }}
                 </div>
@@ -131,10 +131,7 @@
           </div>
         </div>
       </div>
-      <PersonalizationOptionInput
-        label="add another kit"
-        :lines="options[0].settings[0].lines"
-      />
+      <PersonalizationOptionInput label="add another kit" :lines="lines" />
     </div>
   </DivContainer>
 </template>
@@ -164,6 +161,10 @@ export default {
     const scene7Id = ref(computed(() => store.getters.getScene7Id));
     const emblemId = ref(computed(() => store.getters.getEmblem));
     const text = ref(props?.options[0]?.settings[0]?.description);
+    const lines = computed(
+      () =>
+        filter(props?.options[0]?.settings, ["value", scene7Id.value])[0]?.lines
+    );
     const change = (event, category = "sentiment") => {
       const setting = JSON.parse(event.target.value);
       if (category === "emblem") {
@@ -226,9 +227,10 @@ export default {
     };
     return {
       text,
-      change,
       scene7Id,
       activeLayout,
+      lines,
+      change,
       selectLayout,
       defaultSelected,
       updateScene7Id,

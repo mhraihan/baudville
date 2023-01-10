@@ -34,7 +34,10 @@ export default {
   props: {
     id: String,
     labelText: String,
-    modelValue: String,
+    modelValue: {
+      type: String,
+      default: "",
+    },
     line: Object,
     index: Number,
     type: {
@@ -55,7 +58,7 @@ export default {
     const count = ref(limit.value);
     // check overflow when layout changes
     const updateInput = (text = props.modelValue) => {
-      const textVal = text.slice(0, limit.value);
+      const textVal = text?.slice(0, limit.value);
       count.value = limit.value - textVal?.length;
 
       emit("update:modelValue", textVal);
